@@ -1,0 +1,7 @@
+[submodule "deps/sirius"]
+	path = deps/sirius
+	url = https://github.com/sirius-db/sirius.git
+[submodule "deps/seekdb"]
+	path = deps/seekdb
+	url = https://github.com/Mai-icy/seekdb.git
+	branch = feat/sirius-parquet

@@ -20,11 +20,27 @@
 | 本仓库 | Python 服务、快照管理、计划编码、Decimal 适配、公开 FFI 桥接及验证 | 本仓库 |
 | Sirius | Parquet 扫描、执行计划落地、GPU 计算 | [sirius-db/sirius](https://github.com/sirius-db/sirius)，不修改源码 |
 
-**这是集成开发版本，不能直接搭配普通 seekdb main 使用。** 首次拆分时，seekdb 的功能改动仍在 `feat/sirius-parquet` 工作区，尚未形成已推送的功能提交。该分支名表示来源，并不表示远端已有对应分支。所需接口、已验证的 Sirius 提交及源码哈希见 [依赖约定](docs/upstreams.md) 和 [来源清单](docs/source-provenance.json)。
+**这是集成开发版本，不能直接搭配普通 seekdb main 使用。** 两个上游通过 Git submodule 关联，仓库固定其提交，不会随上游分支自动升级：
+
+- `deps/seekdb` → 你的 fork 的 `feat/sirius-parquet` 分支，固定 `193ecbf93c940bd9d94cf24740798abda1cb7d35`。
+- `deps/sirius` → 未修改的 Sirius 上游，固定 `40106bf1c79cbbaddf64cba88a1f24287ffc1621`。
+
+所需接口和更新方法见 [依赖约定](docs/upstreams.md)。[来源清单](docs/source-provenance.json) 保留首次拆分时的历史信息，当前部署版本以 submodule 指针为准。
 
 当前输入路径为 **Parquet、无 pin**。Arrow 输入是另行维护、等待 Sirius 上游支持的方向，本仓库初始版本不提供 Arrow 输入执行路径；已有的 Arrow C Stream 是结果输出接口。
 
 ## 安装与构建
+
+首次下载配套源码：
+
+```sh
+git clone --recurse-submodules https://github.com/Mai-icy/seekdb-sirius-adapter.git
+cd seekdb-sirius-adapter
+```
+
+已有 checkout 更新后执行 `git submodule update --init --recursive`。该命令检出仓库记录的固定提交；不要在部署时使用 `--remote`。
+
+Sirius 自身还关联了 DuckDB、Substrait reader 及其他实验集成的仓库。只需查看两个主仓库时，可先普通 clone，再执行 `git submodule update --init deps/seekdb deps/sirius`；构建所需的嵌套依赖按 Sirius 的构建说明初始化。
 
 计算端使用具备匹配 CUDA 环境的 Linux GPU 机器。先按 Sirius 上游说明构建固定版本；下面的头文件和 `libsirius.so` 必须来自同一构建。Python 编码单测可以在无 GPU 的机器运行。
 
@@ -39,7 +55,7 @@ cmake -S native -B build \
 cmake --build build --parallel
 ```
 
-运行时保证 Sirius 及其依赖库可被动态加载器找到，例如设置相应的 `LD_LIBRARY_PATH`。本仓库不下载或编译 Sirius，不包含其源码或二进制。
+运行时保证 Sirius 及其依赖库可被动态加载器找到，例如设置相应的 `LD_LIBRARY_PATH`。两个引擎需按各自构建说明编译；适配器的 CMake 只构建桥接库，不自动构建引擎，也不分发引擎二进制。
 
 ## 两台机器运行
 
