@@ -1,0 +1,288 @@
+{
+  "description": "Initial extraction from the seekdb integration worktree; runtime sources are byte-for-byte copies. Test changes only relocate repository paths.",
+  "seekdb": {
+    "repository": "https://github.com/Mai-icy/seekdb.git",
+    "branch": "feat/sirius-parquet",
+    "base_commit": "a8b56bbc69e669dc2ac277c3ec885b8c6d8abfaa",
+    "feature_commit": null,
+    "status": "Required database features were uncommitted at extraction; base_commit alone is NOT a compatible runtime."
+  },
+  "files": [
+    {
+      "source": "tools/sirius/adapter_native_plan.py",
+      "destination": "adapter/adapter_native_plan.py",
+      "source_sha256": "bdfb3353991fe2ee9c7cc47fb474da9e8d2d2545c2cbfb23a1e2598f3dd3a0a7",
+      "destination_sha256": "bdfb3353991fe2ee9c7cc47fb474da9e8d2d2545c2cbfb23a1e2598f3dd3a0a7"
+    },
+    {
+      "source": "tools/sirius/compute_node.py",
+      "destination": "adapter/compute_node.py",
+      "source_sha256": "53c386a08b4c38d709f28b1bb6d819c45b133276ba2d638a896ee2d02b3e0c93",
+      "destination_sha256": "53c386a08b4c38d709f28b1bb6d819c45b133276ba2d638a896ee2d02b3e0c93"
+    },
+    {
+      "source": "tools/sirius/decimal_bounds.py",
+      "destination": "adapter/decimal_bounds.py",
+      "source_sha256": "060cf0bbd34891f64d01ef23ba94e94027dd333dee5eb0c45808ed0ee1422019",
+      "destination_sha256": "060cf0bbd34891f64d01ef23ba94e94027dd333dee5eb0c45808ed0ee1422019"
+    },
+    {
+      "source": "tools/sirius/export_substrait.py",
+      "destination": "adapter/export_substrait.py",
+      "source_sha256": "e1a08038e58cf9b09930e1ed50f489701c1d1747c149762cdcc56f1dbac84a91",
+      "destination_sha256": "e1a08038e58cf9b09930e1ed50f489701c1d1747c149762cdcc56f1dbac84a91"
+    },
+    {
+      "source": "tools/sirius/parquet_statistics.py",
+      "destination": "adapter/parquet_statistics.py",
+      "source_sha256": "844c4778b7e7e622348a46d2fae341b513c6b0b94620d66bf4608f0557e899e8",
+      "destination_sha256": "844c4778b7e7e622348a46d2fae341b513c6b0b94620d66bf4608f0557e899e8"
+    },
+    {
+      "source": "tools/sirius/query_service.py",
+      "destination": "adapter/query_service.py",
+      "source_sha256": "7fe643fc651e35001e495a292593be63e670f07455cba98ebc705a00f6f894a7",
+      "destination_sha256": "7fe643fc651e35001e495a292593be63e670f07455cba98ebc705a00f6f894a7"
+    },
+    {
+      "source": "tools/sirius/snapshot_store.py",
+      "destination": "adapter/snapshot_store.py",
+      "source_sha256": "7304d86adf85024c55d85f75cdcc305ebb3d03fd4747c5b2dd8b3cf6e77de563",
+      "destination_sha256": "7304d86adf85024c55d85f75cdcc305ebb3d03fd4747c5b2dd8b3cf6e77de563"
+    },
+    {
+      "source": "tools/sirius/compute_bridge.cpp",
+      "destination": "native/compute_bridge.cpp",
+      "source_sha256": "12b6f3cba7acc012bd2b702aa0e7ee7be4da48c820a9150c079eef3fbfd8e7c7",
+      "destination_sha256": "12b6f3cba7acc012bd2b702aa0e7ee7be4da48c820a9150c079eef3fbfd8e7c7"
+    },
+    {
+      "source": "tools/sirius/CMakeLists.txt",
+      "destination": "native/CMakeLists.txt",
+      "source_sha256": "3e78ec713d8c38b4fb7a73dbc4d972b37430cdc094c913ec1fb7a1d0d323901d",
+      "destination_sha256": "3e78ec713d8c38b4fb7a73dbc4d972b37430cdc094c913ec1fb7a1d0d323901d"
+    },
+    {
+      "source": "tools/sirius/requirements.txt",
+      "destination": "requirements.txt",
+      "source_sha256": "da5e2f5b73b59dd934ea0773c6569af03e35cc0f78ed3bc90a2bd3617c3c6ac9",
+      "destination_sha256": "da5e2f5b73b59dd934ea0773c6569af03e35cc0f78ed3bc90a2bd3617c3c6ac9"
+    },
+    {
+      "source": "tools/sirius/configs/dual-gpu.yaml",
+      "destination": "configs/dual-gpu.yaml",
+      "source_sha256": "be828dd17133b95fd15a45457c0b52630f65d28131c7413b1fcae51384feff53",
+      "destination_sha256": "be828dd17133b95fd15a45457c0b52630f65d28131c7413b1fcae51384feff53"
+    },
+    {
+      "source": "unittest/sql/sirius/decimal_anti_gpu_integration.py",
+      "destination": "tests/integration/decimal_anti_gpu_integration.py",
+      "source_sha256": "1bd771d283e128a2cf23ca6670b2404cbda84f23ba2ce99bea0761bd84b1d086",
+      "destination_sha256": "de78b36790cedddf001f8e19405e28d846643d164feee38717b6afd129dfdd5b"
+    },
+    {
+      "source": "unittest/sql/sirius/decimal_query_path_integration.py",
+      "destination": "tests/integration/decimal_query_path_integration.py",
+      "source_sha256": "be04198be676243f5a39ed8cc20411e92dfd347cd595341aed4abc694a70afd9",
+      "destination_sha256": "be04198be676243f5a39ed8cc20411e92dfd347cd595341aed4abc694a70afd9"
+    },
+    {
+      "source": "unittest/sql/sirius/native_export_integration.py",
+      "destination": "tests/integration/native_export_integration.py",
+      "source_sha256": "29a8d46697c1c9a6e3be183771d602fff2db5d4126fae2d1c48b43b20c982ba3",
+      "destination_sha256": "a6d1cf32a0cb2db584887ac018a441c2404ea87509d9a4267eb94ca2f2d8da8c"
+    },
+    {
+      "source": "unittest/sql/sirius/network_query_integration.py",
+      "destination": "tests/integration/network_query_integration.py",
+      "source_sha256": "446d8676bac1ac3d93f24e2c09c1836df1a252d54a2daf07dc065229eedb3865",
+      "destination_sha256": "3f9fb59066859066ecb81c5279e0eed11a180b0400f1da15ef2a39fa35d2ae2a"
+    },
+    {
+      "source": "unittest/sql/sirius/parquet_gpu_integration.py",
+      "destination": "tests/integration/parquet_gpu_integration.py",
+      "source_sha256": "373474d905e6a8f301717bc048569794812089a59ab9f94fc59d1082e1dcb88c",
+      "destination_sha256": "c3790460927d5152aa777f0f9614d452b08348c3e46fbb625c0663cea5df31b7"
+    },
+    {
+      "source": "unittest/sql/sirius/query_path_integration.py",
+      "destination": "tests/integration/query_path_integration.py",
+      "source_sha256": "a783fa2f8a6ca046af9abc36c4d6e831fe84f173f4a4dc7e03ed38009d9ddf4d",
+      "destination_sha256": "70e6518680b7d4d3633a49de3224de8f88b1be83356736a8dce56c76055a2c27"
+    },
+    {
+      "source": "unittest/sql/sirius/test_decimal_bounds.py",
+      "destination": "tests/unit/test_decimal_bounds.py",
+      "source_sha256": "479273c07687592abdfc3cee9cce1355e7eca1914daf38d5c791eff234420e38",
+      "destination_sha256": "d6f3e891c9b0fe2c16d5a731fa3e7c21a769edab2323ed8d8006e44cf087b4c4"
+    },
+    {
+      "source": "unittest/sql/sirius/test_native_plan.py",
+      "destination": "tests/unit/test_native_plan.py",
+      "source_sha256": "8a4c4767acc209fc13ff4580a9f1c6a04acaff8260e93c79f34234bc5da6a72f",
+      "destination_sha256": "650071f4be6ad8300467a4905f751c08f8af34008f0d395bd32687bf75ae4a8d"
+    },
+    {
+      "source": "unittest/sql/sirius/tpch_plan_audit.py",
+      "destination": "tests/integration/tpch_plan_audit.py",
+      "source_sha256": "009bc5d95c51710bd659cfe7741c9662b3167ff9b13f96178355aabd451f2edd",
+      "destination_sha256": "74a5869217d712b862559e5405622941afe7a9e11048f7d301f3985f4830c0fe"
+    },
+    {
+      "source": "unittest/sql/sirius/tpch_query_path_integration.py",
+      "destination": "tests/integration/tpch_query_path_integration.py",
+      "source_sha256": "7c6ff9982fdf2fb06b241b46c100f3e528605725166dedfe45981e0504c70206",
+      "destination_sha256": "7c6ff9982fdf2fb06b241b46c100f3e528605725166dedfe45981e0504c70206"
+    },
+    {
+      "source": "unittest/sql/sirius/two_host_query_integration.py",
+      "destination": "tests/integration/two_host_query_integration.py",
+      "source_sha256": "2fef83fef265d9a9f48d4fe84d233b0a1807cbf824b8c4b053fc8cfcee35eb3e",
+      "destination_sha256": "2fef83fef265d9a9f48d4fe84d233b0a1807cbf824b8c4b053fc8cfcee35eb3e"
+    },
+    {
+      "source": "unittest/sql/sirius/tpch_queries/README.md",
+      "destination": "tests/integration/tpch_queries/README.md",
+      "source_sha256": "4a09ef8cf8b27f61b6488f7e67ebc1627e1e92bf8657a528a51d493935694a1a",
+      "destination_sha256": "4a09ef8cf8b27f61b6488f7e67ebc1627e1e92bf8657a528a51d493935694a1a"
+    },
+    {
+      "source": "unittest/sql/sirius/tpch_queries/q01.sql",
+      "destination": "tests/integration/tpch_queries/q01.sql",
+      "source_sha256": "8aefe77a1c97459bc69acbbcdaf3b8637d8ea22dfc3ac7be732d4446da83b69b",
+      "destination_sha256": "8aefe77a1c97459bc69acbbcdaf3b8637d8ea22dfc3ac7be732d4446da83b69b"
+    },
+    {
+      "source": "unittest/sql/sirius/tpch_queries/q02.sql",
+      "destination": "tests/integration/tpch_queries/q02.sql",
+      "source_sha256": "a2219893f952dd2a2586ab297d909ec2d440faabb5e692f24880158aa6877344",
+      "destination_sha256": "a2219893f952dd2a2586ab297d909ec2d440faabb5e692f24880158aa6877344"
+    },
+    {
+      "source": "unittest/sql/sirius/tpch_queries/q03.sql",
+      "destination": "tests/integration/tpch_queries/q03.sql",
+      "source_sha256": "1f120d790d4914652cbf3fbc0fa28ed6573e4adee61ae7164a8c3d99b7c6b7fe",
+      "destination_sha256": "1f120d790d4914652cbf3fbc0fa28ed6573e4adee61ae7164a8c3d99b7c6b7fe"
+    },
+    {
+      "source": "unittest/sql/sirius/tpch_queries/q04.sql",
+      "destination": "tests/integration/tpch_queries/q04.sql",
+      "source_sha256": "2a2be89752fc917bc71e1a59168ead9d00d40c40ea0bbe646206e414b372f888",
+      "destination_sha256": "2a2be89752fc917bc71e1a59168ead9d00d40c40ea0bbe646206e414b372f888"
+    },
+    {
+      "source": "unittest/sql/sirius/tpch_queries/q05.sql",
+      "destination": "tests/integration/tpch_queries/q05.sql",
+      "source_sha256": "495def7debb02ab1def31da07fbc88b4796813b754832ce15d54a35dcb104577",
+      "destination_sha256": "495def7debb02ab1def31da07fbc88b4796813b754832ce15d54a35dcb104577"
+    },
+    {
+      "source": "unittest/sql/sirius/tpch_queries/q06.sql",
+      "destination": "tests/integration/tpch_queries/q06.sql",
+      "source_sha256": "3638535fb92a6026b3359a2ad9e6ed7da9ad9080152513e6fd3818d1a853c29f",
+      "destination_sha256": "3638535fb92a6026b3359a2ad9e6ed7da9ad9080152513e6fd3818d1a853c29f"
+    },
+    {
+      "source": "unittest/sql/sirius/tpch_queries/q07.sql",
+      "destination": "tests/integration/tpch_queries/q07.sql",
+      "source_sha256": "5e8077121a42ca8ebf5ff54e5842a614e839da945b0331e3b63d9ccad2361201",
+      "destination_sha256": "5e8077121a42ca8ebf5ff54e5842a614e839da945b0331e3b63d9ccad2361201"
+    },
+    {
+      "source": "unittest/sql/sirius/tpch_queries/q08.sql",
+      "destination": "tests/integration/tpch_queries/q08.sql",
+      "source_sha256": "948338f54b97a2c49aea15f8c4d609ecf244d00ad7754edcea60b4748504a1ce",
+      "destination_sha256": "948338f54b97a2c49aea15f8c4d609ecf244d00ad7754edcea60b4748504a1ce"
+    },
+    {
+      "source": "unittest/sql/sirius/tpch_queries/q09.sql",
+      "destination": "tests/integration/tpch_queries/q09.sql",
+      "source_sha256": "af90ccbe30ece396209e6627c10c0086ed54208100357922ee404de8bb867e56",
+      "destination_sha256": "af90ccbe30ece396209e6627c10c0086ed54208100357922ee404de8bb867e56"
+    },
+    {
+      "source": "unittest/sql/sirius/tpch_queries/q10.sql",
+      "destination": "tests/integration/tpch_queries/q10.sql",
+      "source_sha256": "0b48b00cffa3776b32e67e9041191dea25095e2a952ee5251990b9c8585031ed",
+      "destination_sha256": "0b48b00cffa3776b32e67e9041191dea25095e2a952ee5251990b9c8585031ed"
+    },
+    {
+      "source": "unittest/sql/sirius/tpch_queries/q11.sql",
+      "destination": "tests/integration/tpch_queries/q11.sql",
+      "source_sha256": "f313c766fac507c1204fb6f2bacd35719a61a11c0f69601302555150dddeda78",
+      "destination_sha256": "f313c766fac507c1204fb6f2bacd35719a61a11c0f69601302555150dddeda78"
+    },
+    {
+      "source": "unittest/sql/sirius/tpch_queries/q12.sql",
+      "destination": "tests/integration/tpch_queries/q12.sql",
+      "source_sha256": "3814c9f4b7a476ee894c477d43cedb299603b1ed0f5315790d52839c8da355bf",
+      "destination_sha256": "3814c9f4b7a476ee894c477d43cedb299603b1ed0f5315790d52839c8da355bf"
+    },
+    {
+      "source": "unittest/sql/sirius/tpch_queries/q13.sql",
+      "destination": "tests/integration/tpch_queries/q13.sql",
+      "source_sha256": "4a4a0b2c5646b2cad8f220a8f4b73ccb9f0acd45542353d63c18a69227bc20a3",
+      "destination_sha256": "4a4a0b2c5646b2cad8f220a8f4b73ccb9f0acd45542353d63c18a69227bc20a3"
+    },
+    {
+      "source": "unittest/sql/sirius/tpch_queries/q14.sql",
+      "destination": "tests/integration/tpch_queries/q14.sql",
+      "source_sha256": "e7ec7960a4c49219fc76dc03495a1530aeb30c796413dd1dc9d501b86934f222",
+      "destination_sha256": "e7ec7960a4c49219fc76dc03495a1530aeb30c796413dd1dc9d501b86934f222"
+    },
+    {
+      "source": "unittest/sql/sirius/tpch_queries/q15.sql",
+      "destination": "tests/integration/tpch_queries/q15.sql",
+      "source_sha256": "1cb57383eeff60261a1b4b2a141c71d8672729d743a7dfa74d9a4bcaf69c44d4",
+      "destination_sha256": "1cb57383eeff60261a1b4b2a141c71d8672729d743a7dfa74d9a4bcaf69c44d4"
+    },
+    {
+      "source": "unittest/sql/sirius/tpch_queries/q16.sql",
+      "destination": "tests/integration/tpch_queries/q16.sql",
+      "source_sha256": "45085e7672cb1500e625e048156fc55369e7a9bc91fd3647c3f7735a870c3ef8",
+      "destination_sha256": "45085e7672cb1500e625e048156fc55369e7a9bc91fd3647c3f7735a870c3ef8"
+    },
+    {
+      "source": "unittest/sql/sirius/tpch_queries/q17.sql",
+      "destination": "tests/integration/tpch_queries/q17.sql",
+      "source_sha256": "dfc7f00ac8a500c2ac2735b05b41b462bbe4af9ce7cd6c37e42d1bb9df4a02e1",
+      "destination_sha256": "dfc7f00ac8a500c2ac2735b05b41b462bbe4af9ce7cd6c37e42d1bb9df4a02e1"
+    },
+    {
+      "source": "unittest/sql/sirius/tpch_queries/q18.sql",
+      "destination": "tests/integration/tpch_queries/q18.sql",
+      "source_sha256": "8c5076061727d974f96708f0da930fc58843eac297a80c7ad658d64d152a19bb",
+      "destination_sha256": "8c5076061727d974f96708f0da930fc58843eac297a80c7ad658d64d152a19bb"
+    },
+    {
+      "source": "unittest/sql/sirius/tpch_queries/q19.sql",
+      "destination": "tests/integration/tpch_queries/q19.sql",
+      "source_sha256": "341f97d1f74deb30aca2a8b0ee849772a3b0e098a06cf12266c63573cb985478",
+      "destination_sha256": "341f97d1f74deb30aca2a8b0ee849772a3b0e098a06cf12266c63573cb985478"
+    },
+    {
+      "source": "unittest/sql/sirius/tpch_queries/q20.sql",
+      "destination": "tests/integration/tpch_queries/q20.sql",
+      "source_sha256": "fa96ad5cb897bf31ec9b96a6b2a0d1f7132e71e2f481321e6db16628bc3e5fd5",
+      "destination_sha256": "fa96ad5cb897bf31ec9b96a6b2a0d1f7132e71e2f481321e6db16628bc3e5fd5"
+    },
+    {
+      "source": "unittest/sql/sirius/tpch_queries/q21.sql",
+      "destination": "tests/integration/tpch_queries/q21.sql",
+      "source_sha256": "b29463f30a64e45a795047ee6e557e6c3c1f01fc612acc997873594048e74b59",
+      "destination_sha256": "b29463f30a64e45a795047ee6e557e6c3c1f01fc612acc997873594048e74b59"
+    },
+    {
+      "source": "unittest/sql/sirius/tpch_queries/q22.sql",
+      "destination": "tests/integration/tpch_queries/q22.sql",
+      "source_sha256": "d8ed6332e75f9193391000ba071e17adcf735a2d99c5a4da0f7c13d695ccbd42",
+      "destination_sha256": "d8ed6332e75f9193391000ba071e17adcf735a2d99c5a4da0f7c13d695ccbd42"
+    },
+    {
+      "source": "LICENSE",
+      "destination": "LICENSE",
+      "source_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "destination_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+pyarrow==26.0.0
+substrait-protobuf==0.78.0
+protobuf>=5,<7
+pymysql==1.2.3

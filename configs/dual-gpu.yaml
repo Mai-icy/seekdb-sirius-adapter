@@ -1,0 +1,24 @@
+# Non-pin Parquet service preset for two 48 GiB GPUs, 64 CPU threads,
+# and one NUMA node with at least 448 GiB available host memory.
+# GPU limits apply per device; host capacity applies per NUMA node.
+# Leaves approximately 2 GiB/device outside the managed GPU pool; host
+# headroom is required for seekdb, decoder workspaces, the driver and the OS.
+# Start with CUDA_VISIBLE_DEVICES=0,1; use a separate service for this preset.
+sirius:
+  max_concurrent_queries: 1
+  topology: { num_gpus: 2 }
+  memory:
+    gpu: { usage_limit_bytes: 49392123904 }
+    host: { capacity_bytes: 446676598784, initial_number_pools: 2, pool_size: 16, block_size: 1048576 }
+  executor:
+    scan_manager: { num_threads: 64, backend: native, uring_n_reactors: 8 }
+    pipeline: { num_threads: 16 }
+    downgrade: { num_threads: 4 }
+    task_creator: { num_threads: 16 }
+  operator_params:
+    scan_task_batch_size: 536870912
+    hash_partition_bytes: 268435456
+    concat_batch_bytes: 536870912
+    max_build_hash_table_bytes: 1073741824
+  telemetry:
+    enable_quent: false

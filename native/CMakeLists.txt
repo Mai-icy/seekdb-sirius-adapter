@@ -1,0 +1,12 @@
+cmake_minimum_required(VERSION 3.20)
+project(sirius_compute_adapter LANGUAGES CXX)
+
+set(SIRIUS_INCLUDE_DIR "" CACHE PATH "Unmodified Sirius public include directory")
+set(SIRIUS_LIBRARY "" CACHE FILEPATH "Matching upstream libsirius shared library")
+if(NOT EXISTS "${SIRIUS_INCLUDE_DIR}/sirius/ffi.hpp" OR NOT EXISTS "${SIRIUS_LIBRARY}")
+  message(FATAL_ERROR "Set SIRIUS_INCLUDE_DIR and SIRIUS_LIBRARY to the same upstream build")
+endif()
+add_library(sirius_compute_bridge SHARED compute_bridge.cpp)
+target_compile_features(sirius_compute_bridge PRIVATE cxx_std_17)
+target_include_directories(sirius_compute_bridge PRIVATE "${SIRIUS_INCLUDE_DIR}")
+target_link_libraries(sirius_compute_bridge PRIVATE "${SIRIUS_LIBRARY}")
