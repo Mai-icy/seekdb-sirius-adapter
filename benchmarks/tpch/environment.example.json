@@ -1,0 +1,21 @@
+{
+  "description": "Replace nulls with actual deployed values; do not include credentials.",
+  "deployment": {
+    "topology": "same-host or two-host",
+    "transport": "mutual-TLS or same-UID Unix socket",
+    "seekdb_commit": null,
+    "seekdb_binary_sha256": null,
+    "adapter_commit": null,
+    "adapter_dirty": null,
+    "sirius_commit": null,
+    "sirius_library_sha256": null,
+    "bridge_library_sha256": null,
+    "sirius_config_sha256": null,
+    "service_workers": 1,
+    "cpu_fallback_disabled": null
+  },
+  "source_host": {"cpu": null, "logical_cpus": null, "ram_gib": null, "seekdb_memory_gib": null},
+  "compute_host": {"cpu": null, "logical_cpus": null, "ram_gib": null, "numa_nodes": null, "gpu_model": null, "gpu_count": null, "gpu_memory_gib_each": null, "cuda_version": null},
+  "dataset": {"generator_version": null, "scale_factor": null, "source_read_scn": null, "row_counts": null, "manifest_sha256": null, "parquet_bytes": null, "source_unchanged_during_run": null},
+  "storage_and_network": {"parquet_storage": null, "network_link": null, "cache_policy": "No OS page-cache eviction by runner"}
+}

@@ -117,6 +117,8 @@ python adapter/snapshot_store.py --root /absolute/compute-inputs --drop SNAPSHOT
 
 ## 验证
 
+可复用的 [TPC-H benchmark](benchmarks/tpch/README.md) 提供 SF1/SF500 运行示例、预热与多轮 CPU/GPU 对照、JSON/Markdown 汇总及历史 SF500 说明。区分命名 Parquet 快照复用和每条 SQL 重新准备输入的计时口径；不完整或失败的套件不生成整体加速比。
+
 ```sh
 python -m unittest discover -s tests/unit -v
 ```

@@ -26,7 +26,9 @@ python -m unittest discover -s tests/unit -v
 | `tpch_plan_audit.py` | TPC-H 原生计划和 Substrait 编码检查 |
 | `tpch_query_path_integration.py` | Q1–Q22 CPU/GPU 结果值与 MySQL 元数据校验 |
 
-有命令行接口的脚本可通过 `--help` 查看参数；直接读取环境的脚本需检查文件中的连接配置。`query_path_integration.py` 及其复用者支持 `SEEKDB_HOST`、`SEEKDB_PORT`、`SEEKDB_USER`、`SEEKDB_PASSWORD`。TPC-H runner 当前连接本地端口、root 无密码测试实例，远端访问可使用专用 SSH 转发；不要将它直接用于生产环境。
+有命令行接口的脚本可通过 `--help` 查看参数；直接读取环境的脚本需检查文件中的连接配置。`query_path_integration.py` 及其复用者、TPC-H runner 均支持 `SEEKDB_HOST`、`SEEKDB_PORT`、`SEEKDB_USER`、`SEEKDB_PASSWORD`。TPC-H runner 另支持 `--host`、`--port`、`--user`，密码仅从环境读取。远端访问可使用专用 SSH 转发；不要将测试脚本直接用于生产环境。
+
+单次正确性验收继续使用下面的入口；预热、多轮测量及结果汇总见 [benchmark 说明](../benchmarks/tpch/README.md)。两者复用同一套 SQL 和结果比较逻辑。
 
 服务已启动、数据已导入测试库后，例如：
 
