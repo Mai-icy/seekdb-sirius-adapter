@@ -1,0 +1,36 @@
+benchmarks/tpch/summarize.py
+  s_5e310febfdb0a5::t_7702fdea72fa96 1-16,29-121
+  s_5e310febfdb0a5::t_79dd39724a6368 17-28
+benchmarks/tpch/environment.example.json
+  s_5e310febfdb0a5::t_0bf87869509143 1-21
+benchmarks/tpch/results/2026-11-13-sf500.json
+  s_5e310febfdb0a5::t_144c7682948c42 1-215
+README.md
+  s_5e310febfdb0a5::t_0bf87869509143 120-121
+tests/integration/tpch_query_path_integration.py
+  s_5e310febfdb0a5::t_9a08ce1dd08309 9,17-21,25,28,30,33-34,39-41,54-63,68-71,77-78,111,121
+tests/README.md
+  s_5e310febfdb0a5::t_0bf87869509143 29-31
+benchmarks/tpch/run.py
+  s_5e310febfdb0a5::t_7702fdea72fa96 1-158
+benchmarks/tpch/README.md
+  s_5e310febfdb0a5::t_0bf87869509143 1-114
+benchmarks/tpch/results/2026-11-13-sf500.md
+  s_5e310febfdb0a5::t_144c7682948c42 1-52
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "a6a1f0936546bb7c3b947e3a6073c2e3643fd469",
+  "prompts": {},
+  "sessions": {
+    "s_5e310febfdb0a5": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c487-297c-77e3-a6ad-2f2f9ec7fe0a",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Maiicy <Maiicy@foxmail.com>"
+    }
+  }
+}
