@@ -1,0 +1,211 @@
+{
+  "test_date": "2026-11-09",
+  "status": "passed",
+  "measured_total_seconds": 28.006818123161793,
+  "first_total_seconds": 29.788402966223657,
+  "pin_capture_seconds": 1032.4246976161376,
+  "zero_input_reuses": 44,
+  "current_run_seconds": 31.30683735664934,
+  "current_run_increase_percent": 11.782913785405746,
+  "queries": [
+    {
+      "query": 1,
+      "mode": "pin",
+      "status": "match_cpu",
+      "rows": 4,
+      "seconds": 2.5382438031956553,
+      "first_seconds": 3.1491479594260454,
+      "oracle_sha256": "c70ce77b547c93001c254492ff38889847790ba51428c04e4cd78f2e32d80628"
+    },
+    {
+      "query": 2,
+      "mode": "pin",
+      "status": "match_cpu",
+      "rows": 100,
+      "seconds": 0.5743487235158682,
+      "first_seconds": 0.9032139237970114,
+      "oracle_sha256": "ea7cbdd2b9c5f761eb100b12c41fc7f146cf1e3b1c78c3213fa18a1a6a8d5f2b"
+    },
+    {
+      "query": 3,
+      "mode": "pin",
+      "status": "match_cpu",
+      "rows": 10,
+      "seconds": 0.9872331926599145,
+      "first_seconds": 1.0008729165419936,
+      "oracle_sha256": "3ae53409dd1f8bf70261093b6904de4010447600e3e9f25ebceb359867e583c5"
+    },
+    {
+      "query": 4,
+      "mode": "pin",
+      "status": "match_cpu",
+      "rows": 5,
+      "seconds": 0.6560462461784482,
+      "first_seconds": 0.6459691254422069,
+      "oracle_sha256": "9587fab215df4f77b5cb38dfb7154782238f97885f10f8e9acf8f9b81fafb2d1"
+    },
+    {
+      "query": 5,
+      "mode": "pin",
+      "status": "match_cpu",
+      "rows": 5,
+      "seconds": 0.8965396834537387,
+      "first_seconds": 0.927601795643568,
+      "oracle_sha256": "0ce06f8dfa027f64ba5de170947e061a2e4d26c34b21eb0e94463b5b3b0b9e48"
+    },
+    {
+      "query": 6,
+      "mode": "pin",
+      "status": "match_cpu",
+      "rows": 1,
+      "seconds": 0.7660784441977739,
+      "first_seconds": 0.772328145802021,
+      "oracle_sha256": "4a2f260f18bc0799e92e2cf271113b03bade2591ba9c28fde2f6957f8a515417"
+    },
+    {
+      "query": 7,
+      "mode": "pin",
+      "status": "match_cpu",
+      "rows": 4,
+      "seconds": 0.8912514066323638,
+      "first_seconds": 0.9166875341907144,
+      "oracle_sha256": "446b6dd32756a0a6f7ee05fbe7cc222862cc22794ac3c017ec7b4c40e68674c3"
+    },
+    {
+      "query": 8,
+      "mode": "pin",
+      "status": "match_cpu",
+      "rows": 2,
+      "seconds": 1.254840007983148,
+      "first_seconds": 1.2609880464151502,
+      "oracle_sha256": "626bf7bb39724c5e754bfb81a0dc8388de756bc7eb3733ca05c33433ea9b534e"
+    },
+    {
+      "query": 9,
+      "mode": "pin",
+      "status": "match_cpu",
+      "rows": 175,
+      "seconds": 2.4453307054936886,
+      "first_seconds": 2.9306809259578586,
+      "oracle_sha256": "09015256e7305b4fc4d2ff117fff3979fde1b5de90be4af4bc64f7bbaa5d887e"
+    },
+    {
+      "query": 10,
+      "mode": "pin",
+      "status": "match_cpu",
+      "rows": 20,
+      "seconds": 1.5006092386320233,
+      "first_seconds": 1.4850455252453685,
+      "oracle_sha256": "2fddcca1836e4353a3d54cd6f2411596c9f0dcde718e278fef49050883543d59"
+    },
+    {
+      "query": 11,
+      "mode": "pin",
+      "status": "match_cpu",
+      "rows": 467405,
+      "seconds": 1.7149739880114794,
+      "first_seconds": 1.8143731374293566,
+      "oracle_sha256": "ca969c632a6095805ceb8f242ab09027dc32327683f61ffa57345a2d06fb6378"
+    },
+    {
+      "query": 12,
+      "mode": "pin",
+      "status": "match_cpu",
+      "rows": 2,
+      "seconds": 1.3030743710696697,
+      "first_seconds": 1.3243134329095483,
+      "oracle_sha256": "315ced445c029e3268db53783ee19ea078cb0be11bd013460a50c9a29191bfc1"
+    },
+    {
+      "query": 13,
+      "mode": "pin",
+      "status": "match_cpu",
+      "rows": 41,
+      "seconds": 1.2974980594590306,
+      "first_seconds": 1.3288485454395413,
+      "oracle_sha256": "a82ab5c304b803e087f8df529c9762314146b4188370b38daf9cd1ad0b77726b"
+    },
+    {
+      "query": 14,
+      "mode": "pin",
+      "status": "match_cpu",
+      "rows": 1,
+      "seconds": 0.9028193969279528,
+      "first_seconds": 0.8881259178742766,
+      "oracle_sha256": "1425af1def812313c4956497137cdaf0072d5ee758db2b8f4c7f456a1f81504a"
+    },
+    {
+      "query": 15,
+      "mode": "pin",
+      "status": "match_cpu",
+      "rows": 1,
+      "seconds": 0.9440479809418321,
+      "first_seconds": 0.9502806151285768,
+      "oracle_sha256": "21036d2c22381e12454f01d08b16d00056c7e75bab779ba694ae0867e96c5ff2"
+    },
+    {
+      "query": 16,
+      "mode": "pin",
+      "status": "match_cpu",
+      "rows": 27840,
+      "seconds": 0.7001778855919838,
+      "first_seconds": 0.7129637217149138,
+      "oracle_sha256": "09c66add6d71b70766e501d64d24f76b0212bb63da66e671d9b8f1b6568029cd"
+    },
+    {
+      "query": 17,
+      "mode": "pin",
+      "status": "match_cpu",
+      "rows": 1,
+      "seconds": 1.2078435393050313,
+      "first_seconds": 1.2059239633381367,
+      "oracle_sha256": "06679770128dfc96102c6cfad839ace895e53dfa5bcfed13ed68c9bf1b9d02f0"
+    },
+    {
+      "query": 18,
+      "mode": "pin",
+      "status": "match_cpu",
+      "rows": 100,
+      "seconds": 1.8672304339706898,
+      "first_seconds": 1.9141336111351848,
+      "oracle_sha256": "1ad7c2ddba8d0fb433f5da4fa731a78df183a1538401b525568dcf40f875409b"
+    },
+    {
+      "query": 19,
+      "mode": "pin",
+      "status": "match_cpu",
+      "rows": 1,
+      "seconds": 1.9880343358963728,
+      "first_seconds": 1.9948240593075752,
+      "oracle_sha256": "76ee48de7626d81d493c8f1d5158e6e37a67dbf03b0e9915e339b4eee664db75"
+    },
+    {
+      "query": 20,
+      "mode": "pin",
+      "status": "match_cpu",
+      "rows": 72343,
+      "seconds": 1.0860846592113376,
+      "first_seconds": 1.1168863223865628,
+      "oracle_sha256": "25b9172e9a0d29dfa9f80b54c4ba47ad5b21ef5c0e96fefa0a7cbbf1a066573f"
+    },
+    {
+      "query": 21,
+      "mode": "pin",
+      "status": "match_cpu",
+      "rows": 100,
+      "seconds": 2.1577872848138213,
+      "first_seconds": 2.212290438823402,
+      "oracle_sha256": "b346f464c546738c8ec733d7f11cee2b548fc667c5c234ba57c3436b1f32aadf"
+    },
+    {
+      "query": 22,
+      "mode": "pin",
+      "status": "match_cpu",
+      "rows": 7,
+      "seconds": 0.326724736019969,
+      "first_seconds": 0.3329033022746444,
+      "oracle_sha256": "ea144995006df4e7bdc3bd1bbee88c30fda0260e920c9d037d53e00fe1aafc86"
+    }
+  ],
+  "note": "Separate historical run with saved CPU result references and no fresh CPU timing. The current 31.307s run did not reproduce 28.007s."
+}

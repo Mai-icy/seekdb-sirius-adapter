@@ -1,0 +1,163 @@
+{
+  "kind": "historical_test_environment",
+  "test_date": "2026-11-13",
+  "export_date": "2026-11-17",
+  "not_a_new_run": true,
+  "hardware": {
+    "evidence": "Same-host hardware capture from the immediately preceding 2026-11-13 query-performance experiment; no new host probe was performed for publication.",
+    "architecture": "x86_64",
+    "cpu_model": "Intel(R) Xeon(R) w7-3565X",
+    "sockets": 1,
+    "physical_cores_per_socket": 32,
+    "threads_per_core": 2,
+    "logical_cpus": 64,
+    "numa_nodes": 1,
+    "cpu_min_mhz": 800,
+    "cpu_max_mhz": 4800,
+    "ram_bytes": 540462571520,
+    "ram_gib_approx": 503.3449935913086,
+    "swap_bytes": 8589930496,
+    "gpu_model": "NVIDIA RTX 5880 Ada Generation",
+    "gpu_count": 2,
+    "gpu_reported_memory_mib_each": 49140,
+    "operating_system_family": "Linux",
+    "os_distribution": null,
+    "kernel_version": null,
+    "nvidia_driver_version": null,
+    "cuda_runtime_version": null,
+    "storage_device_model": null,
+    "unrecorded_fields": "The retained hardware capture does not establish these values at test time; no current values were substituted."
+  },
+  "topology": {
+    "placement": "Single host for seekdb, adapter, Sirius and retained inputs",
+    "query_entry": "seekdb MySQL interface",
+    "adapter_transport": "Same-host Unix socket",
+    "cross_host_transfer_included": false,
+    "mode_execution": "Sequential phases; the CPU source process exited before GPU phases."
+  },
+  "dataset": {
+    "scale_factor": 500,
+    "tables": [
+      "region",
+      "nation",
+      "supplier",
+      "customer",
+      "part",
+      "partsupp",
+      "orders",
+      "lineitem"
+    ],
+    "total_rows": 4330028272,
+    "parquet_files": 154,
+    "parquet_bytes": 229908148390,
+    "parquet_reused": true,
+    "source_business_tables_modified_by_benchmark": false,
+    "origin": "Existing isolated SF500 database clones; the legacy pin retry used an offline reflink clone with metadata-only compatibility adjustments."
+  },
+  "cpu": {
+    "plan_dop": 64,
+    "effective_parameters": {
+      "memory_budget": "416G",
+      "kvcache_memory_limit": "352G",
+      "cpu_count": "64",
+      "memstore_memory_limit": "2G"
+    },
+    "evidence": "configs/cpu-effective-parameters.json"
+  },
+  "parquet": {
+    "plan_dop": 1,
+    "gpu_count": 2,
+    "gpu_pool_gib_each": 46,
+    "host_pool_gib_per_numa": 416,
+    "scan_threads": 64,
+    "pipeline_threads": 16,
+    "task_creator_threads": 16,
+    "downgrade_threads": 4,
+    "scan_batch_mib": 512,
+    "host_memory_block_mib": 1,
+    "hash_partition_mib": 256,
+    "max_build_hash_table_gib": 1,
+    "service_workers": 1,
+    "snapshot_quota_gib": 320,
+    "cache_quota_gib": 384,
+    "source_parameters_from_launch_record": {
+      "memory_budget": "48G",
+      "kvcache_memory_limit": "24G",
+      "memstore_memory_limit": "2G",
+      "cpu_count": "0"
+    },
+    "context_lifetime": "New worker and Context per query; released before success response",
+    "config": "configs/parquet.yaml"
+  },
+  "legacy_pin": {
+    "plan_dop": 1,
+    "gpu_count": 2,
+    "gpu_pool_gib_each": 46,
+    "host_pool_gib_per_numa": 416,
+    "scan_threads": 64,
+    "pipeline_threads": 16,
+    "task_creator_threads": 16,
+    "native_storage_decoder_workers": 16,
+    "scan_batch_mib": 512,
+    "host_memory_block_mib": 8,
+    "hash_partition_gib": 1,
+    "max_build_hash_table_gib": 2,
+    "configured_spill_capacity_gib": 128,
+    "source_parameters_from_launch_record": {
+      "memory_budget": "24G",
+      "kvcache_memory_limit": "8G",
+      "memstore_memory_limit": "2G",
+      "cpu_count": "64"
+    },
+    "context_lifetime": "Persistent Context with native host pin; reused across queries",
+    "config": "configs/legacy-pin.yaml",
+    "public_upstream_capability_claim": false
+  },
+  "software_provenance": {
+    "note": "Artifacts predate standalone repository commits. Published submodule commits are not retroactively asserted to be the exact deployed source state.",
+    "legacy_pin_binary_sha256": {
+      "seekdb": "795c028a87ac637f5819d4eb4545af1e608669545a07764ce9fd3ec81ab0876e",
+      "libadapter.so": "2542544333dfb13d01b43f93b874726558bc4b40f9fabc00607a5f423ef11cf7",
+      "libsirius.so.0": "bd0310709fbc81911ba23a12c402f7d87eeb957be77c4efb693dfffbe017b7f9"
+    },
+    "parquet_related_build_record": {
+      "date": "2026-11-10",
+      "sirius_commit": "40106bf1c79cbbaddf64cba88a1f24287ffc1621",
+      "sirius_library_sha256": "7b0eef2a396e92f57d2135a35ae1a3ebc30c649d5ee3fd3583228d9cb2576d04",
+      "bridge_sha256": "a0e024413dc08822fc5bd474be62d638a9ae1218f90a9f9160eba8a0427e774c",
+      "qualification": "Recorded at the earlier public-FFI build referenced by the three-path launcher; not rehashed during this publication."
+    },
+    "related_dataset_preparation_record": {
+      "date": "2026-11-13",
+      "seekdb_binary_sha256": "74855d2f2cc9eb2122d9b7abcffc1ff1b95ea301d1f833295ef10e5ee2bac6c7",
+      "bridge_sha256": "a0e024413dc08822fc5bd474be62d638a9ae1218f90a9f9160eba8a0427e774c",
+      "qualification": "From the earlier dataset preparation record, not a separate binary hash capture of the final three-path run."
+    },
+    "adapter_source_sha256_from_prior_same_host_capture": {
+      "parquet_statistics.py": "844c4778b7e7e622348a46d2fae341b513c6b0b94620d66bf4608f0557e899e8",
+      "adapter_native_plan.py": "bdfb3353991fe2ee9c7cc47fb474da9e8d2d2545c2cbfb23a1e2598f3dd3a0a7",
+      "decimal_bounds.py": "060cf0bbd34891f64d01ef23ba94e94027dd333dee5eb0c45808ed0ee1422019",
+      "compute_node.py": "53c386a08b4c38d709f28b1bb6d819c45b133276ba2d638a896ee2d02b3e0c93",
+      "query_service.py": "7fe643fc651e35001e495a292593be63e670f07455cba98ebc705a00f6f894a7"
+    },
+    "exact_deployed_seekdb_commit": null,
+    "exact_deployed_adapter_commit": null,
+    "legacy_pin_sirius_commit": null
+  },
+  "measurement": {
+    "runs_per_query_per_mode": 2,
+    "warmup": "Trial 0 immediately precedes measured trial 1 for each query",
+    "reported_trial": 1,
+    "total_successful_query_executions": 132,
+    "timer": "Client execute through complete fetchall",
+    "excluded": [
+      "Dataset preparation",
+      "Native pin loading and the eight-table COUNT join",
+      "External result comparison",
+      "Result file writes"
+    ],
+    "os_page_cache_cleared": false,
+    "repeated_measurement_median": false,
+    "historical_runner": "Archived three-path runner; differs from the current benchmark wrapper, which warms an entire suite and does not implement legacy native pin."
+  }
+}

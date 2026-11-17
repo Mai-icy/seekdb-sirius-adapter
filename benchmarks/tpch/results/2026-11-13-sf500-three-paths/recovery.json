@@ -1,0 +1,65 @@
+{
+  "initial_attempt": {
+    "status": "failed",
+    "cpu_status": "passed",
+    "parquet_status": "passed",
+    "pin_status": "failed",
+    "pin_error": "TimeoutError('pin source startup')",
+    "pin_completed_queries": 0
+  },
+  "legacy_pin_recovery": {
+    "scope": "Isolated test clone only; not a product upgrade/downgrade procedure",
+    "source_was_stopped": true,
+    "reflink_clone": true,
+    "business_table_data_rewritten": false,
+    "original_source_modified": false,
+    "changes": [
+      {
+        "kind": "system_variable_rename",
+        "from": "gpu_snapshot",
+        "to": "sirius_snapshot",
+        "affected_rows": {
+          "__all_sys_variable": 1,
+          "__all_sys_variable_history": 1
+        }
+      },
+      {
+        "kind": "legacy_flags",
+        "variables": [
+          "execution_backend",
+          "sirius_snapshot"
+        ],
+        "flags": 66,
+        "affected_rows": {
+          "__all_sys_variable": 2,
+          "__all_sys_variable_history": 2
+        }
+      },
+      {
+        "kind": "compression_metadata_alias",
+        "from": "zstd",
+        "to": "zstd_1.3.8",
+        "affected_rows": {
+          "__all_table": 29,
+          "__all_table_history": 63
+        }
+      }
+    ],
+    "other_recorded_failures": [
+      "Historical pin data directory no longer available",
+      "Legacy startup rejection",
+      "Unsupported table query before restoring the legacy compression alias"
+    ],
+    "final_retry_status": "passed",
+    "completed_queries": 22,
+    "passed_queries": 22
+  },
+  "final_status": "passed",
+  "all_test_processes_stopped_at_final_audit": true,
+  "retained_at_final_audit": [
+    "154 Parquet files",
+    "Statistics cache",
+    "Isolated pin-compatible data clone"
+  ],
+  "audit_is_historical_not_current_process_state": true
+}

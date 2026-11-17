@@ -119,6 +119,8 @@ python adapter/snapshot_store.py --root /absolute/compute-inputs --drop SNAPSHOT
 
 The reusable [TPC-H benchmark](benchmarks/tpch/README.md) provides SF1/SF500 examples, warmup and repeated CPU/GPU comparisons, JSON/Markdown summaries and historical SF500 notes. It distinguishes named Parquet snapshot reuse from preparing input for every SQL statement. Incomplete or failed suites do not produce an aggregate speedup.
 
+The [historical SF500 three-path report](benchmarks/tpch/results/2026-11-13-sf500-three-paths/README.md) includes CPU, legacy native pin and Parquet results, machine settings, exact SQL and the pin recovery record. Its legacy pin stack differs from the current public-FFI implementation.
+
 ```sh
 python -m unittest discover -s tests/unit -v
 ```

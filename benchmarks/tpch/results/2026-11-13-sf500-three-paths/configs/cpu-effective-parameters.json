@@ -1,0 +1,62 @@
+{
+  "memory_budget": [
+    {
+      "svr_type": "observer",
+      "name": "memory_budget",
+      "data_type": "CAPACITY",
+      "value": "416G",
+      "info": "the logical memory budget used to size caches and buffers. 0 targets 80% of cgroup or physical memory while reserving at least 1G for the system when possible. The minimum automatic value is 1G. Range: 0, [1G,).",
+      "section": "OBSERVER",
+      "scope": "CLUSTER",
+      "source": "DEFAULT",
+      "edit_level": "DYNAMIC_EFFECTIVE",
+      "default_value": "0M",
+      "isdefault": 0
+    }
+  ],
+  "kvcache_memory_limit": [
+    {
+      "svr_type": "observer",
+      "name": "kvcache_memory_limit",
+      "data_type": "CAPACITY",
+      "value": "352G",
+      "info": "the maximum memory used by KV cache. 0 derives the limit from memory_budget. The automatic value is min(1T, 40% of memory_budget). A dynamic increase cannot exceed the capacity reserved at startup. Range: [0M,1T].",
+      "section": "RUNTIME",
+      "scope": "CLUSTER",
+      "source": "DEFAULT",
+      "edit_level": "DYNAMIC_EFFECTIVE",
+      "default_value": "0M",
+      "isdefault": 0
+    }
+  ],
+  "cpu_count": [
+    {
+      "svr_type": "observer",
+      "name": "cpu_count",
+      "data_type": "INT",
+      "value": "64",
+      "info": "the number of CPU\\'s in the system. If this parameter is set to zero, the number will be set according to sysconf; otherwise, this parameter is used. Range: [0,+\u221e) in integer",
+      "section": "OBSERVER",
+      "scope": "CLUSTER",
+      "source": "DEFAULT",
+      "edit_level": "DYNAMIC_EFFECTIVE",
+      "default_value": "0",
+      "isdefault": 0
+    }
+  ],
+  "memstore_memory_limit": [
+    {
+      "svr_type": "observer",
+      "name": "memstore_memory_limit",
+      "data_type": "CAPACITY",
+      "value": "2G",
+      "info": "the maximum memory used by Memstore. 0 derives the limit from memory_budget. The automatic value is 50% of memory_budget. Range: [0M,).",
+      "section": "RUNTIME",
+      "scope": "CLUSTER",
+      "source": "DEFAULT",
+      "edit_level": "DYNAMIC_EFFECTIVE",
+      "default_value": "0M",
+      "isdefault": 0
+    }
+  ]
+}

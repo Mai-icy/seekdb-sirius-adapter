@@ -1,0 +1,3755 @@
+{
+  "status": "passed",
+  "scale_factor": 500,
+  "queries_per_mode": 22,
+  "timing": "Two executions per query; second reported; preparation excluded; execute through fetchall",
+  "totals": {
+    "cpu": 192.805076318793,
+    "parquet": 791.3185052573681,
+    "pin": 31.30683735664934
+  },
+  "parquet_over_cpu": 4.104241031231796,
+  "parquet_over_pin": 25.276219895437567,
+  "cpu_over_pin": 6.158561279197454,
+  "parquet_cache_hits": 44,
+  "parquet_uploaded_bytes": 0,
+  "pin_zero_input_reuses": 44,
+  "pin_preparation": {
+    "seconds": 656.719744650647,
+    "rows": [
+      [
+        3000028242
+      ]
+    ]
+  },
+  "measured_parquet_timing": {
+    "result_seconds": 1.1770945647731423,
+    "adapter_seconds": 0.084610047750175,
+    "open_seconds": 16.436069605872035,
+    "execute_seconds": 648.4183369707316,
+    "close_seconds": 110.22413275763392
+  },
+  "version_caveat": "CPU and Parquet use current binary; native pin uses its existing compatible private-FFI implementation on an offline reflink clone.",
+  "modes": {
+    "cpu": {
+      "status": "passed",
+      "cases": [
+        {
+          "query": 1,
+          "passed": true,
+          "sql_sha256": "8aefe77a1c97459bc69acbbcdaf3b8637d8ea22dfc3ac7be732d4446da83b69b",
+          "reference_sha256": "591659ae12c28044fbfef035d950b03389801e8a656896986276a5b65f582403",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 45.234395681880414,
+              "rows": 4,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 12.928456786088645,
+              "rows": 4,
+              "passed": true
+            }
+          ],
+          "seconds": 12.928456786088645,
+          "metadata": [
+            [
+              "l_returnflag",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "l_linestatus",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "sum_qty",
+              246,
+              null,
+              39,
+              39,
+              2,
+              true
+            ],
+            [
+              "sum_base_price",
+              246,
+              null,
+              39,
+              39,
+              2,
+              true
+            ],
+            [
+              "sum_disc_price",
+              246,
+              null,
+              55,
+              55,
+              4,
+              true
+            ],
+            [
+              "sum_charge",
+              246,
+              null,
+              71,
+              71,
+              6,
+              true
+            ],
+            [
+              "avg_qty",
+              246,
+              null,
+              21,
+              21,
+              6,
+              true
+            ],
+            [
+              "avg_price",
+              246,
+              null,
+              21,
+              21,
+              6,
+              true
+            ],
+            [
+              "avg_disc",
+              246,
+              null,
+              21,
+              21,
+              6,
+              true
+            ],
+            [
+              "count_order",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 2,
+          "passed": true,
+          "sql_sha256": "a2219893f952dd2a2586ab297d909ec2d440faabb5e692f24880158aa6877344",
+          "reference_sha256": "efcdb5f565b7fedbdb93b23a3bf76f6a35aab852c0e251a4dc0565eafa126cc5",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 10.668390147387981,
+              "rows": 100,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 0.8034133855253458,
+              "rows": 100,
+              "passed": true
+            }
+          ],
+          "seconds": 0.8034133855253458,
+          "metadata": [
+            [
+              "s_acctbal",
+              246,
+              null,
+              17,
+              17,
+              2,
+              true
+            ],
+            [
+              "s_name",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "n_name",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "p_partkey",
+              8,
+              null,
+              20,
+              20,
+              0,
+              false
+            ],
+            [
+              "p_mfgr",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "s_address",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "s_phone",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "s_comment",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 3,
+          "passed": true,
+          "sql_sha256": "1f120d790d4914652cbf3fbc0fa28ed6573e4adee61ae7164a8c3d99b7c6b7fe",
+          "reference_sha256": "0d5335cc573b6073bb0af27c947b6bc90d7558ccc85e93c5e7710066430e82db",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 22.112594936043024,
+              "rows": 10,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 10.50955753121525,
+              "rows": 10,
+              "passed": true
+            }
+          ],
+          "seconds": 10.50955753121525,
+          "metadata": [
+            [
+              "l_orderkey",
+              8,
+              null,
+              20,
+              20,
+              0,
+              false
+            ],
+            [
+              "revenue",
+              246,
+              null,
+              55,
+              55,
+              4,
+              true
+            ],
+            [
+              "o_orderdate",
+              10,
+              null,
+              10,
+              10,
+              0,
+              true
+            ],
+            [
+              "o_shippriority",
+              3,
+              null,
+              11,
+              11,
+              0,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 4,
+          "passed": true,
+          "sql_sha256": "2a2be89752fc917bc71e1a59168ead9d00d40c40ea0bbe646206e414b372f888",
+          "reference_sha256": "ea2f38a59e2c43b40c25379a9bedff79a05fae869efb8588c5513282428aa5d4",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 5.88768516574055,
+              "rows": 5,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 5.4293473502621055,
+              "rows": 5,
+              "passed": true
+            }
+          ],
+          "seconds": 5.4293473502621055,
+          "metadata": [
+            [
+              "o_orderpriority",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "order_count",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 5,
+          "passed": true,
+          "sql_sha256": "495def7debb02ab1def31da07fbc88b4796813b754832ce15d54a35dcb104577",
+          "reference_sha256": "06b0b79f609a9a731fb628bb1de9f9ff3fa882368842f5f3fcf910b95af9785b",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 6.685290239751339,
+              "rows": 5,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 6.173718815669417,
+              "rows": 5,
+              "passed": true
+            }
+          ],
+          "seconds": 6.173718815669417,
+          "metadata": [
+            [
+              "n_name",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "revenue",
+              246,
+              null,
+              55,
+              55,
+              4,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 6,
+          "passed": true,
+          "sql_sha256": "3638535fb92a6026b3359a2ad9e6ed7da9ad9080152513e6fd3818d1a853c29f",
+          "reference_sha256": "e16c81d3c56c5b82f6153259f4dffe4bcee3b76f6fd302665cd2d2d923b2f945",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 3.7129729567095637,
+              "rows": 1,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 3.6695477860048413,
+              "rows": 1,
+              "passed": true
+            }
+          ],
+          "seconds": 3.6695477860048413,
+          "metadata": [
+            [
+              "revenue",
+              246,
+              null,
+              54,
+              54,
+              4,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 7,
+          "passed": true,
+          "sql_sha256": "5e8077121a42ca8ebf5ff54e5842a614e839da945b0331e3b63d9ccad2361201",
+          "reference_sha256": "53fcebc2800c8a94e42eea36ce1de351e1a9e764eba941f55412fb20167aa227",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 11.991803299635649,
+              "rows": 4,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 12.330893525853753,
+              "rows": 4,
+              "passed": true
+            }
+          ],
+          "seconds": 12.330893525853753,
+          "metadata": [
+            [
+              "supp_nation",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "cust_nation",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "l_year",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ],
+            [
+              "revenue",
+              246,
+              null,
+              55,
+              55,
+              4,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 8,
+          "passed": true,
+          "sql_sha256": "948338f54b97a2c49aea15f8c4d609ecf244d00ad7754edcea60b4748504a1ce",
+          "reference_sha256": "b9add9e2a98b17a3950b0ca20c667acf491b0b14f1f1a193fe3eef3c2bf85fcc",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 8.555263119749725,
+              "rows": 2,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 8.101829669438303,
+              "rows": 2,
+              "passed": true
+            }
+          ],
+          "seconds": 8.101829669438303,
+          "metadata": [
+            [
+              "o_year",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ],
+            [
+              "mkt_share",
+              246,
+              null,
+              63,
+              63,
+              8,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 9,
+          "passed": true,
+          "sql_sha256": "af90ccbe30ece396209e6627c10c0086ed54208100357922ee404de8bb867e56",
+          "reference_sha256": "a630ac5598b94e4a9a47ed68458b17657766a5d9ef347db46bed7fad27c31cd1",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 18.649579239077866,
+              "rows": 175,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 19.507678223773837,
+              "rows": 175,
+              "passed": true
+            }
+          ],
+          "seconds": 19.507678223773837,
+          "metadata": [
+            [
+              "nation",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "o_year",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ],
+            [
+              "sum_profit",
+              246,
+              null,
+              56,
+              56,
+              4,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 10,
+          "passed": true,
+          "sql_sha256": "0b48b00cffa3776b32e67e9041191dea25095e2a952ee5251990b9c8585031ed",
+          "reference_sha256": "8c181f9b3a5ffbed98db0c2f79d103644cb2911adbf3821abc30affac175ebb8",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 8.178456963039935,
+              "rows": 20,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 7.559725742787123,
+              "rows": 20,
+              "passed": true
+            }
+          ],
+          "seconds": 7.559725742787123,
+          "metadata": [
+            [
+              "c_custkey",
+              8,
+              null,
+              20,
+              20,
+              0,
+              false
+            ],
+            [
+              "c_name",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "revenue",
+              246,
+              null,
+              55,
+              55,
+              4,
+              true
+            ],
+            [
+              "c_acctbal",
+              246,
+              null,
+              17,
+              17,
+              2,
+              true
+            ],
+            [
+              "n_name",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "c_address",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "c_phone",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "c_comment",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 11,
+          "passed": true,
+          "sql_sha256": "8efe5f367760ef03d8e6c43ca6f4b992e71bc79101c03df78519f254c0e23be3",
+          "reference_sha256": "41c1640bbfb1aa4207823f334d8e1ffe525c302c2b116961da4010f0475bf807",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 2.6349549423903227,
+              "rows": 467405,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 2.3400648841634393,
+              "rows": 467405,
+              "passed": true
+            }
+          ],
+          "seconds": 2.3400648841634393,
+          "metadata": [
+            [
+              "ps_partkey",
+              8,
+              null,
+              20,
+              20,
+              0,
+              false
+            ],
+            [
+              "value",
+              246,
+              null,
+              59,
+              59,
+              2,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 12,
+          "passed": true,
+          "sql_sha256": "3814c9f4b7a476ee894c477d43cedb299603b1ed0f5315790d52839c8da355bf",
+          "reference_sha256": "129f0dd2b696e4194733f3eaffe4257284ae2b356c127d48a0895e3e6bdb3f80",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 6.744163027964532,
+              "rows": 2,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 6.614074328914285,
+              "rows": 2,
+              "passed": true
+            }
+          ],
+          "seconds": 6.614074328914285,
+          "metadata": [
+            [
+              "l_shipmode",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "high_line_count",
+              246,
+              null,
+              43,
+              43,
+              0,
+              false
+            ],
+            [
+              "low_line_count",
+              246,
+              null,
+              43,
+              43,
+              0,
+              false
+            ]
+          ]
+        },
+        {
+          "query": 13,
+          "passed": true,
+          "sql_sha256": "4a4a0b2c5646b2cad8f220a8f4b73ccb9f0acd45542353d63c18a69227bc20a3",
+          "reference_sha256": "15f8739fefa47dc794b42b86faf32138117622367cf096bccf54383b48e9c1df",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 9.758632603101432,
+              "rows": 41,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 9.641631634905934,
+              "rows": 41,
+              "passed": true
+            }
+          ],
+          "seconds": 9.641631634905934,
+          "metadata": [
+            [
+              "c_count",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ],
+            [
+              "custdist",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 14,
+          "passed": true,
+          "sql_sha256": "e7ec7960a4c49219fc76dc03495a1530aeb30c796413dd1dc9d501b86934f222",
+          "reference_sha256": "6254db47190d2eecb02f90a2fbcdff09c52c2c4cb842a2b35248a01bd73f9d7d",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 4.109631463885307,
+              "rows": 1,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 4.029318845830858,
+              "rows": 1,
+              "passed": true
+            }
+          ],
+          "seconds": 4.029318845830858,
+          "metadata": [
+            [
+              "promo_revenue",
+              246,
+              null,
+              68,
+              68,
+              10,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 15,
+          "passed": true,
+          "sql_sha256": "1cb57383eeff60261a1b4b2a141c71d8672729d743a7dfa74d9a4bcaf69c44d4",
+          "reference_sha256": "afac9387bd716bfa448f05fc97103d5d436344bb4bb112a4e4dc0312dc741f6c",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 3.6893195789307356,
+              "rows": 1,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 3.6633232310414314,
+              "rows": 1,
+              "passed": true
+            }
+          ],
+          "seconds": 3.6633232310414314,
+          "metadata": [
+            [
+              "s_suppkey",
+              8,
+              null,
+              20,
+              20,
+              0,
+              false
+            ],
+            [
+              "s_name",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "s_address",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "s_phone",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "total_revenue",
+              246,
+              null,
+              55,
+              55,
+              4,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 16,
+          "passed": true,
+          "sql_sha256": "45085e7672cb1500e625e048156fc55369e7a9bc91fd3647c3f7735a870c3ef8",
+          "reference_sha256": "ecd3d3528404387c22c750a75c67b8ac3280da0302b21be6a6022002a391d40a",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 2.733198434114456,
+              "rows": 27840,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 2.83558133430779,
+              "rows": 27840,
+              "passed": true
+            }
+          ],
+          "seconds": 2.83558133430779,
+          "metadata": [
+            [
+              "p_brand",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "p_type",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "p_size",
+              3,
+              null,
+              11,
+              11,
+              0,
+              true
+            ],
+            [
+              "supplier_cnt",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 17,
+          "passed": true,
+          "sql_sha256": "dfc7f00ac8a500c2ac2735b05b41b462bbe4af9ce7cd6c37e42d1bb9df4a02e1",
+          "reference_sha256": "0cbf7e71467826f122fd54f3721a0886cbbf76ff11abe6651638fea9fabcf831",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 3.759590377099812,
+              "rows": 1,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 3.506131090223789,
+              "rows": 1,
+              "passed": true
+            }
+          ],
+          "seconds": 3.506131090223789,
+          "metadata": [
+            [
+              "avg_yearly",
+              246,
+              null,
+              44,
+              44,
+              6,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 18,
+          "passed": true,
+          "sql_sha256": "8c5076061727d974f96708f0da930fc58843eac297a80c7ad658d64d152a19bb",
+          "reference_sha256": "f7223f99a3c2e31af4eaf346d34d1524cf681aa3407add07eab4d303ada6c3c3",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 17.969928562641144,
+              "rows": 100,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 18.237885211594403,
+              "rows": 100,
+              "passed": true
+            }
+          ],
+          "seconds": 18.237885211594403,
+          "metadata": [
+            [
+              "c_name",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "c_custkey",
+              8,
+              null,
+              20,
+              20,
+              0,
+              false
+            ],
+            [
+              "o_orderkey",
+              8,
+              null,
+              20,
+              20,
+              0,
+              false
+            ],
+            [
+              "o_orderdate",
+              10,
+              null,
+              10,
+              10,
+              0,
+              true
+            ],
+            [
+              "o_totalprice",
+              246,
+              null,
+              17,
+              17,
+              2,
+              true
+            ],
+            [
+              "sum(l_quantity)",
+              246,
+              null,
+              39,
+              39,
+              2,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 19,
+          "passed": true,
+          "sql_sha256": "341f97d1f74deb30aca2a8b0ee849772a3b0e098a06cf12266c63573cb985478",
+          "reference_sha256": "f6a2618b27e2835ed74bba8a132b2d7d42bd0e4c31a5e4c3ac4e1c7369d48583",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 9.416429962962866,
+              "rows": 1,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 9.026542672887444,
+              "rows": 1,
+              "passed": true
+            }
+          ],
+          "seconds": 9.026542672887444,
+          "metadata": [
+            [
+              "revenue",
+              246,
+              null,
+              55,
+              55,
+              4,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 20,
+          "passed": true,
+          "sql_sha256": "fa96ad5cb897bf31ec9b96a6b2a0d1f7132e71e2f481321e6db16628bc3e5fd5",
+          "reference_sha256": "cf76660e8fc150c21be57d9ab9e56b3a776e1cf187248cb88cf272c23d1cef57",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 7.624875257723033,
+              "rows": 72343,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 6.790919684804976,
+              "rows": 72343,
+              "passed": true
+            }
+          ],
+          "seconds": 6.790919684804976,
+          "metadata": [
+            [
+              "s_name",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "s_address",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 21,
+          "passed": true,
+          "sql_sha256": "b29463f30a64e45a795047ee6e557e6c3c1f01fc612acc997873594048e74b59",
+          "reference_sha256": "8f12b3da5eed429b0f5a3949ec6fe8279b0e96c7a9c6dbd2909d2d7b0e66a3aa",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 16.08963670860976,
+              "rows": 100,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 36.90697620995343,
+              "rows": 100,
+              "passed": true
+            }
+          ],
+          "seconds": 36.90697620995343,
+          "metadata": [
+            [
+              "s_name",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "numwait",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 22,
+          "passed": true,
+          "sql_sha256": "d8ed6332e75f9193391000ba071e17adcf735a2d99c5a4da0f7c13d695ccbd42",
+          "reference_sha256": "4b131ae1525692f45644540fa7a992fe0684bdf6d4c14b015f230268fc7f354d",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 2.3059840444475412,
+              "rows": 7,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 2.1984583735466003,
+              "rows": 7,
+              "passed": true
+            }
+          ],
+          "seconds": 2.1984583735466003,
+          "metadata": [
+            [
+              "cntrycode",
+              253,
+              null,
+              8,
+              8,
+              0,
+              true
+            ],
+            [
+              "numcust",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ],
+            [
+              "totacctbal",
+              246,
+              null,
+              39,
+              39,
+              2,
+              true
+            ]
+          ]
+        }
+      ],
+      "total_seconds": 192.805076318793
+    },
+    "parquet": {
+      "status": "passed",
+      "cases": [
+        {
+          "query": 1,
+          "passed": true,
+          "sql_sha256": "8aefe77a1c97459bc69acbbcdaf3b8637d8ea22dfc3ac7be732d4446da83b69b",
+          "reference_sha256": "591659ae12c28044fbfef035d950b03389801e8a656896986276a5b65f582403",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 36.908269284293056,
+              "rows": 4,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 36.98106321785599,
+              "rows": 4,
+              "passed": true
+            }
+          ],
+          "seconds": 36.98106321785599,
+          "metadata": [
+            [
+              "l_returnflag",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "l_linestatus",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "sum_qty",
+              246,
+              null,
+              39,
+              39,
+              2,
+              true
+            ],
+            [
+              "sum_base_price",
+              246,
+              null,
+              39,
+              39,
+              2,
+              true
+            ],
+            [
+              "sum_disc_price",
+              246,
+              null,
+              55,
+              55,
+              4,
+              true
+            ],
+            [
+              "sum_charge",
+              246,
+              null,
+              71,
+              71,
+              6,
+              true
+            ],
+            [
+              "avg_qty",
+              246,
+              null,
+              21,
+              21,
+              6,
+              true
+            ],
+            [
+              "avg_price",
+              246,
+              null,
+              21,
+              21,
+              6,
+              true
+            ],
+            [
+              "avg_disc",
+              246,
+              null,
+              21,
+              21,
+              6,
+              true
+            ],
+            [
+              "count_order",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 2,
+          "passed": true,
+          "sql_sha256": "a2219893f952dd2a2586ab297d909ec2d440faabb5e692f24880158aa6877344",
+          "reference_sha256": "efcdb5f565b7fedbdb93b23a3bf76f6a35aab852c0e251a4dc0565eafa126cc5",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 10.062049865722656,
+              "rows": 100,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 9.961353206075728,
+              "rows": 100,
+              "passed": true
+            }
+          ],
+          "seconds": 9.961353206075728,
+          "metadata": [
+            [
+              "s_acctbal",
+              246,
+              null,
+              17,
+              17,
+              2,
+              true
+            ],
+            [
+              "s_name",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "n_name",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "p_partkey",
+              8,
+              null,
+              20,
+              20,
+              0,
+              false
+            ],
+            [
+              "p_mfgr",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "s_address",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "s_phone",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "s_comment",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 3,
+          "passed": true,
+          "sql_sha256": "1f120d790d4914652cbf3fbc0fa28ed6573e4adee61ae7164a8c3d99b7c6b7fe",
+          "reference_sha256": "0d5335cc573b6073bb0af27c947b6bc90d7558ccc85e93c5e7710066430e82db",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 37.25064085703343,
+              "rows": 10,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 37.124658920802176,
+              "rows": 10,
+              "passed": true
+            }
+          ],
+          "seconds": 37.124658920802176,
+          "metadata": [
+            [
+              "l_orderkey",
+              8,
+              null,
+              20,
+              20,
+              0,
+              false
+            ],
+            [
+              "revenue",
+              246,
+              null,
+              55,
+              55,
+              4,
+              true
+            ],
+            [
+              "o_orderdate",
+              10,
+              null,
+              10,
+              10,
+              0,
+              true
+            ],
+            [
+              "o_shippriority",
+              3,
+              null,
+              11,
+              11,
+              0,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 4,
+          "passed": true,
+          "sql_sha256": "2a2be89752fc917bc71e1a59168ead9d00d40c40ea0bbe646206e414b372f888",
+          "reference_sha256": "ea2f38a59e2c43b40c25379a9bedff79a05fae869efb8588c5513282428aa5d4",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 32.97419380955398,
+              "rows": 5,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 33.21423407364637,
+              "rows": 5,
+              "passed": true
+            }
+          ],
+          "seconds": 33.21423407364637,
+          "metadata": [
+            [
+              "o_orderpriority",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "order_count",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 5,
+          "passed": true,
+          "sql_sha256": "495def7debb02ab1def31da07fbc88b4796813b754832ce15d54a35dcb104577",
+          "reference_sha256": "06b0b79f609a9a731fb628bb1de9f9ff3fa882368842f5f3fcf910b95af9785b",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 39.82184643018991,
+              "rows": 5,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 40.55398658756167,
+              "rows": 5,
+              "passed": true
+            }
+          ],
+          "seconds": 40.55398658756167,
+          "metadata": [
+            [
+              "n_name",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "revenue",
+              246,
+              null,
+              55,
+              55,
+              4,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 6,
+          "passed": true,
+          "sql_sha256": "3638535fb92a6026b3359a2ad9e6ed7da9ad9080152513e6fd3818d1a853c29f",
+          "reference_sha256": "e16c81d3c56c5b82f6153259f4dffe4bcee3b76f6fd302665cd2d2d923b2f945",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 36.69121416565031,
+              "rows": 1,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 37.026162141002715,
+              "rows": 1,
+              "passed": true
+            }
+          ],
+          "seconds": 37.026162141002715,
+          "metadata": [
+            [
+              "revenue",
+              246,
+              null,
+              54,
+              54,
+              4,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 7,
+          "passed": true,
+          "sql_sha256": "5e8077121a42ca8ebf5ff54e5842a614e839da945b0331e3b63d9ccad2361201",
+          "reference_sha256": "53fcebc2800c8a94e42eea36ce1de351e1a9e764eba941f55412fb20167aa227",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 46.43705215957016,
+              "rows": 4,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 45.794274343177676,
+              "rows": 4,
+              "passed": true
+            }
+          ],
+          "seconds": 45.794274343177676,
+          "metadata": [
+            [
+              "supp_nation",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "cust_nation",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "l_year",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ],
+            [
+              "revenue",
+              246,
+              null,
+              55,
+              55,
+              4,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 8,
+          "passed": true,
+          "sql_sha256": "948338f54b97a2c49aea15f8c4d609ecf244d00ad7754edcea60b4748504a1ce",
+          "reference_sha256": "b9add9e2a98b17a3950b0ca20c667acf491b0b14f1f1a193fe3eef3c2bf85fcc",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 45.116165411658585,
+              "rows": 2,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 45.503684639930725,
+              "rows": 2,
+              "passed": true
+            }
+          ],
+          "seconds": 45.503684639930725,
+          "metadata": [
+            [
+              "o_year",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ],
+            [
+              "mkt_share",
+              246,
+              null,
+              63,
+              63,
+              8,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 9,
+          "passed": true,
+          "sql_sha256": "af90ccbe30ece396209e6627c10c0086ed54208100357922ee404de8bb867e56",
+          "reference_sha256": "a630ac5598b94e4a9a47ed68458b17657766a5d9ef347db46bed7fad27c31cd1",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 48.1797630013898,
+              "rows": 175,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 47.74138574581593,
+              "rows": 175,
+              "passed": true
+            }
+          ],
+          "seconds": 47.74138574581593,
+          "metadata": [
+            [
+              "nation",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "o_year",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ],
+            [
+              "sum_profit",
+              246,
+              null,
+              56,
+              56,
+              4,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 10,
+          "passed": true,
+          "sql_sha256": "0b48b00cffa3776b32e67e9041191dea25095e2a952ee5251990b9c8585031ed",
+          "reference_sha256": "8c181f9b3a5ffbed98db0c2f79d103644cb2911adbf3821abc30affac175ebb8",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 38.19888582825661,
+              "rows": 20,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 37.529810511507094,
+              "rows": 20,
+              "passed": true
+            }
+          ],
+          "seconds": 37.529810511507094,
+          "metadata": [
+            [
+              "c_custkey",
+              8,
+              null,
+              20,
+              20,
+              0,
+              false
+            ],
+            [
+              "c_name",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "revenue",
+              246,
+              null,
+              55,
+              55,
+              4,
+              true
+            ],
+            [
+              "c_acctbal",
+              246,
+              null,
+              17,
+              17,
+              2,
+              true
+            ],
+            [
+              "n_name",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "c_address",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "c_phone",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "c_comment",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 11,
+          "passed": true,
+          "sql_sha256": "8efe5f367760ef03d8e6c43ca6f4b992e71bc79101c03df78519f254c0e23be3",
+          "reference_sha256": "41c1640bbfb1aa4207823f334d8e1ffe525c302c2b116961da4010f0475bf807",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 9.697445788420737,
+              "rows": 467405,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 9.77756165806204,
+              "rows": 467405,
+              "passed": true
+            }
+          ],
+          "seconds": 9.77756165806204,
+          "metadata": [
+            [
+              "ps_partkey",
+              8,
+              null,
+              20,
+              20,
+              0,
+              false
+            ],
+            [
+              "value",
+              246,
+              null,
+              59,
+              59,
+              2,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 12,
+          "passed": true,
+          "sql_sha256": "3814c9f4b7a476ee894c477d43cedb299603b1ed0f5315790d52839c8da355bf",
+          "reference_sha256": "129f0dd2b696e4194733f3eaffe4257284ae2b356c127d48a0895e3e6bdb3f80",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 39.90979499742389,
+              "rows": 2,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 40.067142732441425,
+              "rows": 2,
+              "passed": true
+            }
+          ],
+          "seconds": 40.067142732441425,
+          "metadata": [
+            [
+              "l_shipmode",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "high_line_count",
+              246,
+              null,
+              43,
+              43,
+              0,
+              false
+            ],
+            [
+              "low_line_count",
+              246,
+              null,
+              43,
+              43,
+              0,
+              false
+            ]
+          ]
+        },
+        {
+          "query": 13,
+          "passed": true,
+          "sql_sha256": "4a4a0b2c5646b2cad8f220a8f4b73ccb9f0acd45542353d63c18a69227bc20a3",
+          "reference_sha256": "15f8739fefa47dc794b42b86faf32138117622367cf096bccf54383b48e9c1df",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 13.9648228995502,
+              "rows": 41,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 13.991931363940239,
+              "rows": 41,
+              "passed": true
+            }
+          ],
+          "seconds": 13.991931363940239,
+          "metadata": [
+            [
+              "c_count",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ],
+            [
+              "custdist",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 14,
+          "passed": true,
+          "sql_sha256": "e7ec7960a4c49219fc76dc03495a1530aeb30c796413dd1dc9d501b86934f222",
+          "reference_sha256": "6254db47190d2eecb02f90a2fbcdff09c52c2c4cb842a2b35248a01bd73f9d7d",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 41.63428060617298,
+              "rows": 1,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 42.01896224822849,
+              "rows": 1,
+              "passed": true
+            }
+          ],
+          "seconds": 42.01896224822849,
+          "metadata": [
+            [
+              "promo_revenue",
+              246,
+              null,
+              68,
+              68,
+              10,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 15,
+          "passed": true,
+          "sql_sha256": "1cb57383eeff60261a1b4b2a141c71d8672729d743a7dfa74d9a4bcaf69c44d4",
+          "reference_sha256": "afac9387bd716bfa448f05fc97103d5d436344bb4bb112a4e4dc0312dc741f6c",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 56.688634634017944,
+              "rows": 1,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 57.030246848240495,
+              "rows": 1,
+              "passed": true
+            }
+          ],
+          "seconds": 57.030246848240495,
+          "metadata": [
+            [
+              "s_suppkey",
+              8,
+              null,
+              20,
+              20,
+              0,
+              false
+            ],
+            [
+              "s_name",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "s_address",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "s_phone",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "total_revenue",
+              246,
+              null,
+              55,
+              55,
+              4,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 16,
+          "passed": true,
+          "sql_sha256": "45085e7672cb1500e625e048156fc55369e7a9bc91fd3647c3f7735a870c3ef8",
+          "reference_sha256": "ecd3d3528404387c22c750a75c67b8ac3280da0302b21be6a6022002a391d40a",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 7.094506497494876,
+              "rows": 27840,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 6.788253597915173,
+              "rows": 27840,
+              "passed": true
+            }
+          ],
+          "seconds": 6.788253597915173,
+          "metadata": [
+            [
+              "p_brand",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "p_type",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "p_size",
+              3,
+              null,
+              11,
+              11,
+              0,
+              true
+            ],
+            [
+              "supplier_cnt",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 17,
+          "passed": true,
+          "sql_sha256": "dfc7f00ac8a500c2ac2735b05b41b462bbe4af9ce7cd6c37e42d1bb9df4a02e1",
+          "reference_sha256": "0cbf7e71467826f122fd54f3721a0886cbbf76ff11abe6651638fea9fabcf831",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 47.20629097428173,
+              "rows": 1,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 47.43862541485578,
+              "rows": 1,
+              "passed": true
+            }
+          ],
+          "seconds": 47.43862541485578,
+          "metadata": [
+            [
+              "avg_yearly",
+              246,
+              null,
+              44,
+              44,
+              6,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 18,
+          "passed": true,
+          "sql_sha256": "8c5076061727d974f96708f0da930fc58843eac297a80c7ad658d64d152a19bb",
+          "reference_sha256": "f7223f99a3c2e31af4eaf346d34d1524cf681aa3407add07eab4d303ada6c3c3",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 44.248615365475416,
+              "rows": 100,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 44.07681082561612,
+              "rows": 100,
+              "passed": true
+            }
+          ],
+          "seconds": 44.07681082561612,
+          "metadata": [
+            [
+              "c_name",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "c_custkey",
+              8,
+              null,
+              20,
+              20,
+              0,
+              false
+            ],
+            [
+              "o_orderkey",
+              8,
+              null,
+              20,
+              20,
+              0,
+              false
+            ],
+            [
+              "o_orderdate",
+              10,
+              null,
+              10,
+              10,
+              0,
+              true
+            ],
+            [
+              "o_totalprice",
+              246,
+              null,
+              17,
+              17,
+              2,
+              true
+            ],
+            [
+              "sum(l_quantity)",
+              246,
+              null,
+              39,
+              39,
+              2,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 19,
+          "passed": true,
+          "sql_sha256": "341f97d1f74deb30aca2a8b0ee849772a3b0e098a06cf12266c63573cb985478",
+          "reference_sha256": "f6a2618b27e2835ed74bba8a132b2d7d42bd0e4c31a5e4c3ac4e1c7369d48583",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 43.790290201082826,
+              "rows": 1,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 43.77212572377175,
+              "rows": 1,
+              "passed": true
+            }
+          ],
+          "seconds": 43.77212572377175,
+          "metadata": [
+            [
+              "revenue",
+              246,
+              null,
+              55,
+              55,
+              4,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 20,
+          "passed": true,
+          "sql_sha256": "fa96ad5cb897bf31ec9b96a6b2a0d1f7132e71e2f481321e6db16628bc3e5fd5",
+          "reference_sha256": "cf76660e8fc150c21be57d9ab9e56b3a776e1cf187248cb88cf272c23d1cef57",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 40.97801999095827,
+              "rows": 72343,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 41.349628964439034,
+              "rows": 72343,
+              "passed": true
+            }
+          ],
+          "seconds": 41.349628964439034,
+          "metadata": [
+            [
+              "s_name",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "s_address",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 21,
+          "passed": true,
+          "sql_sha256": "b29463f30a64e45a795047ee6e557e6c3c1f01fc612acc997873594048e74b59",
+          "reference_sha256": "8f12b3da5eed429b0f5a3949ec6fe8279b0e96c7a9c6dbd2909d2d7b0e66a3aa",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 63.82093605212867,
+              "rows": 100,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 63.705870480276644,
+              "rows": 100,
+              "passed": true
+            }
+          ],
+          "seconds": 63.705870480276644,
+          "metadata": [
+            [
+              "s_name",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "numwait",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 22,
+          "passed": true,
+          "sql_sha256": "d8ed6332e75f9193391000ba071e17adcf735a2d99c5a4da0f7c13d695ccbd42",
+          "reference_sha256": "4b131ae1525692f45644540fa7a992fe0684bdf6d4c14b015f230268fc7f354d",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 9.95853345375508,
+              "rows": 7,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 9.870732012204826,
+              "rows": 7,
+              "passed": true
+            }
+          ],
+          "seconds": 9.870732012204826,
+          "metadata": [
+            [
+              "cntrycode",
+              253,
+              null,
+              8,
+              8,
+              0,
+              true
+            ],
+            [
+              "numcust",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ],
+            [
+              "totacctbal",
+              246,
+              null,
+              39,
+              39,
+              2,
+              true
+            ]
+          ]
+        }
+      ],
+      "total_seconds": 791.3185052573681
+    },
+    "pin": {
+      "status": "passed",
+      "cases": [
+        {
+          "query": 1,
+          "passed": true,
+          "sql_sha256": "8aefe77a1c97459bc69acbbcdaf3b8637d8ea22dfc3ac7be732d4446da83b69b",
+          "reference_sha256": "591659ae12c28044fbfef035d950b03389801e8a656896986276a5b65f582403",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 2.7464718967676163,
+              "rows": 4,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 2.608284809626639,
+              "rows": 4,
+              "passed": true
+            }
+          ],
+          "seconds": 2.608284809626639,
+          "metadata": [
+            [
+              "l_returnflag",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "l_linestatus",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "sum_qty",
+              246,
+              null,
+              39,
+              39,
+              2,
+              true
+            ],
+            [
+              "sum_base_price",
+              246,
+              null,
+              39,
+              39,
+              2,
+              true
+            ],
+            [
+              "sum_disc_price",
+              246,
+              null,
+              55,
+              55,
+              4,
+              true
+            ],
+            [
+              "sum_charge",
+              246,
+              null,
+              71,
+              71,
+              6,
+              true
+            ],
+            [
+              "avg_qty",
+              246,
+              null,
+              21,
+              21,
+              6,
+              true
+            ],
+            [
+              "avg_price",
+              246,
+              null,
+              21,
+              21,
+              6,
+              true
+            ],
+            [
+              "avg_disc",
+              246,
+              null,
+              21,
+              21,
+              6,
+              true
+            ],
+            [
+              "count_order",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 2,
+          "passed": true,
+          "sql_sha256": "a2219893f952dd2a2586ab297d909ec2d440faabb5e692f24880158aa6877344",
+          "reference_sha256": "efcdb5f565b7fedbdb93b23a3bf76f6a35aab852c0e251a4dc0565eafa126cc5",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 0.9631269881501794,
+              "rows": 100,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 0.5997057156637311,
+              "rows": 100,
+              "passed": true
+            }
+          ],
+          "seconds": 0.5997057156637311,
+          "metadata": [
+            [
+              "s_acctbal",
+              246,
+              null,
+              17,
+              17,
+              2,
+              true
+            ],
+            [
+              "s_name",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "n_name",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "p_partkey",
+              8,
+              null,
+              20,
+              20,
+              0,
+              false
+            ],
+            [
+              "p_mfgr",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "s_address",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "s_phone",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "s_comment",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 3,
+          "passed": true,
+          "sql_sha256": "1f120d790d4914652cbf3fbc0fa28ed6573e4adee61ae7164a8c3d99b7c6b7fe",
+          "reference_sha256": "0d5335cc573b6073bb0af27c947b6bc90d7558ccc85e93c5e7710066430e82db",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 1.2577921636402607,
+              "rows": 10,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 1.2415678529068828,
+              "rows": 10,
+              "passed": true
+            }
+          ],
+          "seconds": 1.2415678529068828,
+          "metadata": [
+            [
+              "l_orderkey",
+              8,
+              null,
+              20,
+              20,
+              0,
+              false
+            ],
+            [
+              "revenue",
+              246,
+              null,
+              55,
+              55,
+              4,
+              true
+            ],
+            [
+              "o_orderdate",
+              10,
+              null,
+              10,
+              10,
+              0,
+              true
+            ],
+            [
+              "o_shippriority",
+              3,
+              null,
+              11,
+              11,
+              0,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 4,
+          "passed": true,
+          "sql_sha256": "2a2be89752fc917bc71e1a59168ead9d00d40c40ea0bbe646206e414b372f888",
+          "reference_sha256": "ea2f38a59e2c43b40c25379a9bedff79a05fae869efb8588c5513282428aa5d4",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 0.8388796001672745,
+              "rows": 5,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 0.8316696221008897,
+              "rows": 5,
+              "passed": true
+            }
+          ],
+          "seconds": 0.8316696221008897,
+          "metadata": [
+            [
+              "o_orderpriority",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "order_count",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 5,
+          "passed": true,
+          "sql_sha256": "495def7debb02ab1def31da07fbc88b4796813b754832ce15d54a35dcb104577",
+          "reference_sha256": "06b0b79f609a9a731fb628bb1de9f9ff3fa882368842f5f3fcf910b95af9785b",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 1.115702599287033,
+              "rows": 5,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 1.1211519939824939,
+              "rows": 5,
+              "passed": true
+            }
+          ],
+          "seconds": 1.1211519939824939,
+          "metadata": [
+            [
+              "n_name",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "revenue",
+              246,
+              null,
+              55,
+              55,
+              4,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 6,
+          "passed": true,
+          "sql_sha256": "3638535fb92a6026b3359a2ad9e6ed7da9ad9080152513e6fd3818d1a853c29f",
+          "reference_sha256": "e16c81d3c56c5b82f6153259f4dffe4bcee3b76f6fd302665cd2d2d923b2f945",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 0.8258858947083354,
+              "rows": 1,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 0.7950374744832516,
+              "rows": 1,
+              "passed": true
+            }
+          ],
+          "seconds": 0.7950374744832516,
+          "metadata": [
+            [
+              "revenue",
+              246,
+              null,
+              54,
+              54,
+              4,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 7,
+          "passed": true,
+          "sql_sha256": "5e8077121a42ca8ebf5ff54e5842a614e839da945b0331e3b63d9ccad2361201",
+          "reference_sha256": "53fcebc2800c8a94e42eea36ce1de351e1a9e764eba941f55412fb20167aa227",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 1.0608779592439532,
+              "rows": 4,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 1.0273497877642512,
+              "rows": 4,
+              "passed": true
+            }
+          ],
+          "seconds": 1.0273497877642512,
+          "metadata": [
+            [
+              "supp_nation",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "cust_nation",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "l_year",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ],
+            [
+              "revenue",
+              246,
+              null,
+              55,
+              55,
+              4,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 8,
+          "passed": true,
+          "sql_sha256": "948338f54b97a2c49aea15f8c4d609ecf244d00ad7754edcea60b4748504a1ce",
+          "reference_sha256": "b9add9e2a98b17a3950b0ca20c667acf491b0b14f1f1a193fe3eef3c2bf85fcc",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 1.4893610952422023,
+              "rows": 2,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 1.4575759638100863,
+              "rows": 2,
+              "passed": true
+            }
+          ],
+          "seconds": 1.4575759638100863,
+          "metadata": [
+            [
+              "o_year",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ],
+            [
+              "mkt_share",
+              246,
+              null,
+              63,
+              63,
+              8,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 9,
+          "passed": true,
+          "sql_sha256": "af90ccbe30ece396209e6627c10c0086ed54208100357922ee404de8bb867e56",
+          "reference_sha256": "a630ac5598b94e4a9a47ed68458b17657766a5d9ef347db46bed7fad27c31cd1",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 3.0140398060902953,
+              "rows": 175,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 2.7605438670143485,
+              "rows": 175,
+              "passed": true
+            }
+          ],
+          "seconds": 2.7605438670143485,
+          "metadata": [
+            [
+              "nation",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "o_year",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ],
+            [
+              "sum_profit",
+              246,
+              null,
+              56,
+              56,
+              4,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 10,
+          "passed": true,
+          "sql_sha256": "0b48b00cffa3776b32e67e9041191dea25095e2a952ee5251990b9c8585031ed",
+          "reference_sha256": "8c181f9b3a5ffbed98db0c2f79d103644cb2911adbf3821abc30affac175ebb8",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 1.8340112967416644,
+              "rows": 20,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 1.8309276271611452,
+              "rows": 20,
+              "passed": true
+            }
+          ],
+          "seconds": 1.8309276271611452,
+          "metadata": [
+            [
+              "c_custkey",
+              8,
+              null,
+              20,
+              20,
+              0,
+              false
+            ],
+            [
+              "c_name",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "revenue",
+              246,
+              null,
+              55,
+              55,
+              4,
+              true
+            ],
+            [
+              "c_acctbal",
+              246,
+              null,
+              17,
+              17,
+              2,
+              true
+            ],
+            [
+              "n_name",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "c_address",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "c_phone",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "c_comment",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 11,
+          "passed": true,
+          "sql_sha256": "8efe5f367760ef03d8e6c43ca6f4b992e71bc79101c03df78519f254c0e23be3",
+          "reference_sha256": "41c1640bbfb1aa4207823f334d8e1ffe525c302c2b116961da4010f0475bf807",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 1.7411635452881455,
+              "rows": 467405,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 1.6155302273109555,
+              "rows": 467405,
+              "passed": true
+            }
+          ],
+          "seconds": 1.6155302273109555,
+          "metadata": [
+            [
+              "ps_partkey",
+              8,
+              null,
+              20,
+              20,
+              0,
+              false
+            ],
+            [
+              "value",
+              246,
+              null,
+              59,
+              59,
+              2,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 12,
+          "passed": true,
+          "sql_sha256": "3814c9f4b7a476ee894c477d43cedb299603b1ed0f5315790d52839c8da355bf",
+          "reference_sha256": "129f0dd2b696e4194733f3eaffe4257284ae2b356c127d48a0895e3e6bdb3f80",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 1.6029631150886416,
+              "rows": 2,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 1.4872378846630454,
+              "rows": 2,
+              "passed": true
+            }
+          ],
+          "seconds": 1.4872378846630454,
+          "metadata": [
+            [
+              "l_shipmode",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "high_line_count",
+              246,
+              null,
+              43,
+              43,
+              0,
+              false
+            ],
+            [
+              "low_line_count",
+              246,
+              null,
+              43,
+              43,
+              0,
+              false
+            ]
+          ]
+        },
+        {
+          "query": 13,
+          "passed": true,
+          "sql_sha256": "4a4a0b2c5646b2cad8f220a8f4b73ccb9f0acd45542353d63c18a69227bc20a3",
+          "reference_sha256": "15f8739fefa47dc794b42b86faf32138117622367cf096bccf54383b48e9c1df",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 1.3938962938264012,
+              "rows": 41,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 1.3580057751387358,
+              "rows": 41,
+              "passed": true
+            }
+          ],
+          "seconds": 1.3580057751387358,
+          "metadata": [
+            [
+              "c_count",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ],
+            [
+              "custdist",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 14,
+          "passed": true,
+          "sql_sha256": "e7ec7960a4c49219fc76dc03495a1530aeb30c796413dd1dc9d501b86934f222",
+          "reference_sha256": "6254db47190d2eecb02f90a2fbcdff09c52c2c4cb842a2b35248a01bd73f9d7d",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 1.0393169112503529,
+              "rows": 1,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 1.0356547571718693,
+              "rows": 1,
+              "passed": true
+            }
+          ],
+          "seconds": 1.0356547571718693,
+          "metadata": [
+            [
+              "promo_revenue",
+              246,
+              null,
+              68,
+              68,
+              10,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 15,
+          "passed": true,
+          "sql_sha256": "1cb57383eeff60261a1b4b2a141c71d8672729d743a7dfa74d9a4bcaf69c44d4",
+          "reference_sha256": "afac9387bd716bfa448f05fc97103d5d436344bb4bb112a4e4dc0312dc741f6c",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 1.970304461196065,
+              "rows": 1,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 1.147520700469613,
+              "rows": 1,
+              "passed": true
+            }
+          ],
+          "seconds": 1.147520700469613,
+          "metadata": [
+            [
+              "s_suppkey",
+              8,
+              null,
+              20,
+              20,
+              0,
+              false
+            ],
+            [
+              "s_name",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "s_address",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "s_phone",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "total_revenue",
+              246,
+              null,
+              55,
+              55,
+              4,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 16,
+          "passed": true,
+          "sql_sha256": "45085e7672cb1500e625e048156fc55369e7a9bc91fd3647c3f7735a870c3ef8",
+          "reference_sha256": "ecd3d3528404387c22c750a75c67b8ac3280da0302b21be6a6022002a391d40a",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 0.7358887363225222,
+              "rows": 27840,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 0.6802546633407474,
+              "rows": 27840,
+              "passed": true
+            }
+          ],
+          "seconds": 0.6802546633407474,
+          "metadata": [
+            [
+              "p_brand",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "p_type",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "p_size",
+              3,
+              null,
+              11,
+              11,
+              0,
+              true
+            ],
+            [
+              "supplier_cnt",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 17,
+          "passed": true,
+          "sql_sha256": "dfc7f00ac8a500c2ac2735b05b41b462bbe4af9ce7cd6c37e42d1bb9df4a02e1",
+          "reference_sha256": "0cbf7e71467826f122fd54f3721a0886cbbf76ff11abe6651638fea9fabcf831",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 1.2664895290508866,
+              "rows": 1,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 1.2542335530743003,
+              "rows": 1,
+              "passed": true
+            }
+          ],
+          "seconds": 1.2542335530743003,
+          "metadata": [
+            [
+              "avg_yearly",
+              246,
+              null,
+              44,
+              44,
+              6,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 18,
+          "passed": true,
+          "sql_sha256": "8c5076061727d974f96708f0da930fc58843eac297a80c7ad658d64d152a19bb",
+          "reference_sha256": "f7223f99a3c2e31af4eaf346d34d1524cf681aa3407add07eab4d303ada6c3c3",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 2.2725620390847325,
+              "rows": 100,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 2.226565821096301,
+              "rows": 100,
+              "passed": true
+            }
+          ],
+          "seconds": 2.226565821096301,
+          "metadata": [
+            [
+              "c_name",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "c_custkey",
+              8,
+              null,
+              20,
+              20,
+              0,
+              false
+            ],
+            [
+              "o_orderkey",
+              8,
+              null,
+              20,
+              20,
+              0,
+              false
+            ],
+            [
+              "o_orderdate",
+              10,
+              null,
+              10,
+              10,
+              0,
+              true
+            ],
+            [
+              "o_totalprice",
+              246,
+              null,
+              17,
+              17,
+              2,
+              true
+            ],
+            [
+              "sum(l_quantity)",
+              246,
+              null,
+              39,
+              39,
+              2,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 19,
+          "passed": true,
+          "sql_sha256": "341f97d1f74deb30aca2a8b0ee849772a3b0e098a06cf12266c63573cb985478",
+          "reference_sha256": "f6a2618b27e2835ed74bba8a132b2d7d42bd0e4c31a5e4c3ac4e1c7369d48583",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 2.377112221904099,
+              "rows": 1,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 2.345445090904832,
+              "rows": 1,
+              "passed": true
+            }
+          ],
+          "seconds": 2.345445090904832,
+          "metadata": [
+            [
+              "revenue",
+              246,
+              null,
+              55,
+              55,
+              4,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 20,
+          "passed": true,
+          "sql_sha256": "fa96ad5cb897bf31ec9b96a6b2a0d1f7132e71e2f481321e6db16628bc3e5fd5",
+          "reference_sha256": "cf76660e8fc150c21be57d9ab9e56b3a776e1cf187248cb88cf272c23d1cef57",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 1.2042924454435706,
+              "rows": 72343,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 1.1794613031670451,
+              "rows": 72343,
+              "passed": true
+            }
+          ],
+          "seconds": 1.1794613031670451,
+          "metadata": [
+            [
+              "s_name",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "s_address",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 21,
+          "passed": true,
+          "sql_sha256": "b29463f30a64e45a795047ee6e557e6c3c1f01fc612acc997873594048e74b59",
+          "reference_sha256": "8f12b3da5eed429b0f5a3949ec6fe8279b0e96c7a9c6dbd2909d2d7b0e66a3aa",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 2.4442476741969585,
+              "rows": 100,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 2.3577251732349396,
+              "rows": 100,
+              "passed": true
+            }
+          ],
+          "seconds": 2.3577251732349396,
+          "metadata": [
+            [
+              "s_name",
+              253,
+              null,
+              1024,
+              1024,
+              0,
+              true
+            ],
+            [
+              "numwait",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ]
+          ]
+        },
+        {
+          "query": 22,
+          "passed": true,
+          "sql_sha256": "d8ed6332e75f9193391000ba071e17adcf735a2d99c5a4da0f7c13d695ccbd42",
+          "reference_sha256": "4b131ae1525692f45644540fa7a992fe0684bdf6d4c14b015f230268fc7f354d",
+          "runs": [
+            {
+              "trial": 0,
+              "warmup": true,
+              "seconds": 0.3650840288028121,
+              "rows": 7,
+              "passed": true
+            },
+            {
+              "trial": 1,
+              "warmup": false,
+              "seconds": 0.34538769256323576,
+              "rows": 7,
+              "passed": true
+            }
+          ],
+          "seconds": 0.34538769256323576,
+          "metadata": [
+            [
+              "cntrycode",
+              253,
+              null,
+              8,
+              8,
+              0,
+              true
+            ],
+            [
+              "numcust",
+              8,
+              null,
+              20,
+              20,
+              0,
+              true
+            ],
+            [
+              "totacctbal",
+              246,
+              null,
+              39,
+              39,
+              2,
+              true
+            ]
+          ]
+        }
+      ],
+      "total_seconds": 31.30683735664934
+    }
+  }
+}

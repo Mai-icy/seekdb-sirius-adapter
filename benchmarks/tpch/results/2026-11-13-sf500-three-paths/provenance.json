@@ -1,0 +1,266 @@
+{
+  "description": "Source SHA-256 values refer to original retained artifacts. Published copies and transformations are identified explicitly. Original private paths and process identifiers are not published. Generated summaries derive from these records; absent source files are not included in this public archive.",
+  "sources": [
+    {
+      "source": "20261113-three-paths/comparison.json",
+      "source_sha256": "9fb42ec047634ab757a6c5be710a67ade43f0b7dacea385e86c082b981995a58",
+      "published_file": "comparison.json",
+      "published_sha256": "9fb42ec047634ab757a6c5be710a67ade43f0b7dacea385e86c082b981995a58",
+      "transformation": "Byte-for-byte copy"
+    },
+    {
+      "source": "20261113-three-paths/result-sha256.json",
+      "source_sha256": "09727bbcb8d4c88c365fe499c3d6c5ebeb4cbf681c4f344c812453b40a216917",
+      "published_file": "result-sha256.json",
+      "published_sha256": "09727bbcb8d4c88c365fe499c3d6c5ebeb4cbf681c4f344c812453b40a216917",
+      "transformation": "Byte-for-byte copy"
+    },
+    {
+      "source": "20261113-three-paths/cpu-effective-parameters.json",
+      "source_sha256": "daff56421fd70c51dd0bcdebacde1957325feb720792c52e5bec2384c556bd55",
+      "published_file": "configs/cpu-effective-parameters.json",
+      "published_sha256": "daff56421fd70c51dd0bcdebacde1957325feb720792c52e5bec2384c556bd55",
+      "transformation": "Byte-for-byte copy"
+    },
+    {
+      "source": "20261113-three-paths/parquet.yaml",
+      "source_sha256": "be828dd17133b95fd15a45457c0b52630f65d28131c7413b1fcae51384feff53",
+      "published_file": "configs/parquet.yaml",
+      "published_sha256": "be828dd17133b95fd15a45457c0b52630f65d28131c7413b1fcae51384feff53",
+      "transformation": "Byte-for-byte copy"
+    },
+    {
+      "source": "20261113-three-paths/pin-max/pin.yaml",
+      "source_sha256": "d72ac8dffc229a47d43d134816bce1ca16ce7d85abdfb6a971aaa4f034711b5c",
+      "published_file": "configs/legacy-pin.yaml",
+      "published_sha256": "e6f4e0a82adc45893a584e64de7f38f29e679ae7e0a728d87f0453cdbe58a3f4",
+      "transformation": "Only the spill mount path is replaced with /absolute/pin-spill; numeric settings are unchanged."
+    },
+    {
+      "source": "20261113-range-sf500/query-results/q01.sql",
+      "source_sha256": "8aefe77a1c97459bc69acbbcdaf3b8637d8ea22dfc3ac7be732d4446da83b69b",
+      "published_file": "sql/q01.sql",
+      "published_sha256": "8aefe77a1c97459bc69acbbcdaf3b8637d8ea22dfc3ac7be732d4446da83b69b",
+      "transformation": "Byte-for-byte copy"
+    },
+    {
+      "source": "20261113-range-sf500/query-results/q02.sql",
+      "source_sha256": "a2219893f952dd2a2586ab297d909ec2d440faabb5e692f24880158aa6877344",
+      "published_file": "sql/q02.sql",
+      "published_sha256": "a2219893f952dd2a2586ab297d909ec2d440faabb5e692f24880158aa6877344",
+      "transformation": "Byte-for-byte copy"
+    },
+    {
+      "source": "20261113-range-sf500/query-results/q03.sql",
+      "source_sha256": "1f120d790d4914652cbf3fbc0fa28ed6573e4adee61ae7164a8c3d99b7c6b7fe",
+      "published_file": "sql/q03.sql",
+      "published_sha256": "1f120d790d4914652cbf3fbc0fa28ed6573e4adee61ae7164a8c3d99b7c6b7fe",
+      "transformation": "Byte-for-byte copy"
+    },
+    {
+      "source": "20261113-range-sf500/query-results/q04.sql",
+      "source_sha256": "2a2be89752fc917bc71e1a59168ead9d00d40c40ea0bbe646206e414b372f888",
+      "published_file": "sql/q04.sql",
+      "published_sha256": "2a2be89752fc917bc71e1a59168ead9d00d40c40ea0bbe646206e414b372f888",
+      "transformation": "Byte-for-byte copy"
+    },
+    {
+      "source": "20261113-range-sf500/query-results/q05.sql",
+      "source_sha256": "495def7debb02ab1def31da07fbc88b4796813b754832ce15d54a35dcb104577",
+      "published_file": "sql/q05.sql",
+      "published_sha256": "495def7debb02ab1def31da07fbc88b4796813b754832ce15d54a35dcb104577",
+      "transformation": "Byte-for-byte copy"
+    },
+    {
+      "source": "20261113-range-sf500/query-results/q06.sql",
+      "source_sha256": "3638535fb92a6026b3359a2ad9e6ed7da9ad9080152513e6fd3818d1a853c29f",
+      "published_file": "sql/q06.sql",
+      "published_sha256": "3638535fb92a6026b3359a2ad9e6ed7da9ad9080152513e6fd3818d1a853c29f",
+      "transformation": "Byte-for-byte copy"
+    },
+    {
+      "source": "20261113-range-sf500/query-results/q07.sql",
+      "source_sha256": "5e8077121a42ca8ebf5ff54e5842a614e839da945b0331e3b63d9ccad2361201",
+      "published_file": "sql/q07.sql",
+      "published_sha256": "5e8077121a42ca8ebf5ff54e5842a614e839da945b0331e3b63d9ccad2361201",
+      "transformation": "Byte-for-byte copy"
+    },
+    {
+      "source": "20261113-range-sf500/query-results/q08.sql",
+      "source_sha256": "948338f54b97a2c49aea15f8c4d609ecf244d00ad7754edcea60b4748504a1ce",
+      "published_file": "sql/q08.sql",
+      "published_sha256": "948338f54b97a2c49aea15f8c4d609ecf244d00ad7754edcea60b4748504a1ce",
+      "transformation": "Byte-for-byte copy"
+    },
+    {
+      "source": "20261113-range-sf500/query-results/q09.sql",
+      "source_sha256": "af90ccbe30ece396209e6627c10c0086ed54208100357922ee404de8bb867e56",
+      "published_file": "sql/q09.sql",
+      "published_sha256": "af90ccbe30ece396209e6627c10c0086ed54208100357922ee404de8bb867e56",
+      "transformation": "Byte-for-byte copy"
+    },
+    {
+      "source": "20261113-range-sf500/query-results/q10.sql",
+      "source_sha256": "0b48b00cffa3776b32e67e9041191dea25095e2a952ee5251990b9c8585031ed",
+      "published_file": "sql/q10.sql",
+      "published_sha256": "0b48b00cffa3776b32e67e9041191dea25095e2a952ee5251990b9c8585031ed",
+      "transformation": "Byte-for-byte copy"
+    },
+    {
+      "source": "20261113-range-sf500/query-results/q11.sql",
+      "source_sha256": "8efe5f367760ef03d8e6c43ca6f4b992e71bc79101c03df78519f254c0e23be3",
+      "published_file": "sql/q11.sql",
+      "published_sha256": "8efe5f367760ef03d8e6c43ca6f4b992e71bc79101c03df78519f254c0e23be3",
+      "transformation": "Byte-for-byte copy"
+    },
+    {
+      "source": "20261113-range-sf500/query-results/q12.sql",
+      "source_sha256": "3814c9f4b7a476ee894c477d43cedb299603b1ed0f5315790d52839c8da355bf",
+      "published_file": "sql/q12.sql",
+      "published_sha256": "3814c9f4b7a476ee894c477d43cedb299603b1ed0f5315790d52839c8da355bf",
+      "transformation": "Byte-for-byte copy"
+    },
+    {
+      "source": "20261113-range-sf500/query-results/q13.sql",
+      "source_sha256": "4a4a0b2c5646b2cad8f220a8f4b73ccb9f0acd45542353d63c18a69227bc20a3",
+      "published_file": "sql/q13.sql",
+      "published_sha256": "4a4a0b2c5646b2cad8f220a8f4b73ccb9f0acd45542353d63c18a69227bc20a3",
+      "transformation": "Byte-for-byte copy"
+    },
+    {
+      "source": "20261113-range-sf500/query-results/q14.sql",
+      "source_sha256": "e7ec7960a4c49219fc76dc03495a1530aeb30c796413dd1dc9d501b86934f222",
+      "published_file": "sql/q14.sql",
+      "published_sha256": "e7ec7960a4c49219fc76dc03495a1530aeb30c796413dd1dc9d501b86934f222",
+      "transformation": "Byte-for-byte copy"
+    },
+    {
+      "source": "20261113-range-sf500/query-results/q15.sql",
+      "source_sha256": "1cb57383eeff60261a1b4b2a141c71d8672729d743a7dfa74d9a4bcaf69c44d4",
+      "published_file": "sql/q15.sql",
+      "published_sha256": "1cb57383eeff60261a1b4b2a141c71d8672729d743a7dfa74d9a4bcaf69c44d4",
+      "transformation": "Byte-for-byte copy"
+    },
+    {
+      "source": "20261113-range-sf500/query-results/q16.sql",
+      "source_sha256": "45085e7672cb1500e625e048156fc55369e7a9bc91fd3647c3f7735a870c3ef8",
+      "published_file": "sql/q16.sql",
+      "published_sha256": "45085e7672cb1500e625e048156fc55369e7a9bc91fd3647c3f7735a870c3ef8",
+      "transformation": "Byte-for-byte copy"
+    },
+    {
+      "source": "20261113-range-sf500/query-results/q17.sql",
+      "source_sha256": "dfc7f00ac8a500c2ac2735b05b41b462bbe4af9ce7cd6c37e42d1bb9df4a02e1",
+      "published_file": "sql/q17.sql",
+      "published_sha256": "dfc7f00ac8a500c2ac2735b05b41b462bbe4af9ce7cd6c37e42d1bb9df4a02e1",
+      "transformation": "Byte-for-byte copy"
+    },
+    {
+      "source": "20261113-range-sf500/query-results/q18.sql",
+      "source_sha256": "8c5076061727d974f96708f0da930fc58843eac297a80c7ad658d64d152a19bb",
+      "published_file": "sql/q18.sql",
+      "published_sha256": "8c5076061727d974f96708f0da930fc58843eac297a80c7ad658d64d152a19bb",
+      "transformation": "Byte-for-byte copy"
+    },
+    {
+      "source": "20261113-range-sf500/query-results/q19.sql",
+      "source_sha256": "341f97d1f74deb30aca2a8b0ee849772a3b0e098a06cf12266c63573cb985478",
+      "published_file": "sql/q19.sql",
+      "published_sha256": "341f97d1f74deb30aca2a8b0ee849772a3b0e098a06cf12266c63573cb985478",
+      "transformation": "Byte-for-byte copy"
+    },
+    {
+      "source": "20261113-range-sf500/query-results/q20.sql",
+      "source_sha256": "fa96ad5cb897bf31ec9b96a6b2a0d1f7132e71e2f481321e6db16628bc3e5fd5",
+      "published_file": "sql/q20.sql",
+      "published_sha256": "fa96ad5cb897bf31ec9b96a6b2a0d1f7132e71e2f481321e6db16628bc3e5fd5",
+      "transformation": "Byte-for-byte copy"
+    },
+    {
+      "source": "20261113-range-sf500/query-results/q21.sql",
+      "source_sha256": "b29463f30a64e45a795047ee6e557e6c3c1f01fc612acc997873594048e74b59",
+      "published_file": "sql/q21.sql",
+      "published_sha256": "b29463f30a64e45a795047ee6e557e6c3c1f01fc612acc997873594048e74b59",
+      "transformation": "Byte-for-byte copy"
+    },
+    {
+      "source": "20261113-range-sf500/query-results/q22.sql",
+      "source_sha256": "d8ed6332e75f9193391000ba071e17adcf735a2d99c5a4da0f7c13d695ccbd42",
+      "published_file": "sql/q22.sql",
+      "published_sha256": "d8ed6332e75f9193391000ba071e17adcf735a2d99c5a4da0f7c13d695ccbd42",
+      "transformation": "Byte-for-byte copy"
+    },
+    {
+      "source": "20261113-three-paths/README.md",
+      "source_sha256": "8b4d1323e80a93618141f883d7084dffd71931a711df7d9a0c0d86afbf40ba16"
+    },
+    {
+      "source": "20261113-three-paths/run.py",
+      "source_sha256": "beef43cfc0e1e92ef85f34e6afd060204fe975345e6bf0a01f0c32ace9bfd485"
+    },
+    {
+      "source": "20261113-three-paths/progress.json",
+      "source_sha256": "156834241e86184582e13b0f7552a6f9d88bbd896cd036ad72ee7d6a8949f945"
+    },
+    {
+      "source": "20261113-three-paths/pin-max/progress.json",
+      "source_sha256": "3c875acbaae60a4957bd6cb829cf164f2d7099e9c71d4a820a4d7df82d57912d"
+    },
+    {
+      "source": "20261113-three-paths/pin-max/pin-preparation.json",
+      "source_sha256": "51f455603b3e9670902b6613ebf7ea341ba5ca1b0e898ff3f57d66ea6c030f60"
+    },
+    {
+      "source": "20261113-three-paths/pin-max/pin-source-process.json",
+      "source_sha256": "d72a06541faeea0b744b2840b1c070a32802b7995ae370171389a2a3e723f9e6"
+    },
+    {
+      "source": "20261113-three-paths/pin-max/pin-service-process.json",
+      "source_sha256": "a4ed5abe1dce7c7d1af4bae2f4995f2a515680253023adcc5795714d5c59bb08"
+    },
+    {
+      "source": "20261113-three-paths/pin-binary-sha256.json",
+      "source_sha256": "121a9e61e4abfe8379d0775db5d579559238affc415729149836e99504cf35a2"
+    },
+    {
+      "source": "20261113-three-paths/historical-pin-20261109.json",
+      "source_sha256": "fbce8610b06ab10e9fbc8e052ce74a0db7532c80ca2855f362861bc51a6a451a"
+    },
+    {
+      "source": "20261113-three-paths/compatibility/clone.json",
+      "source_sha256": "2fae2dedc843b14a04c4aa13ee3401560c617683ca52a047af9fd9255aa0f17a"
+    },
+    {
+      "source": "20261113-three-paths/compatibility/sysvar-clone-adjustment.json",
+      "source_sha256": "b26d9e39146836ef0331edb85a0f4e19a04d744fef07df476df4b61d66863970"
+    },
+    {
+      "source": "20261113-three-paths/compatibility/sysvar-clone-flags-adjustment.json",
+      "source_sha256": "59292c8d298469a6dcdc1c5b7e63fa95368f33a2ba9e13ee4666268401279698"
+    },
+    {
+      "source": "20261113-three-paths/compatibility/compression-alias-adjustment.json",
+      "source_sha256": "cbdcfa00b6f0a40f736383fb49989c954b2819398f1d46ae53683bd84be6288d"
+    },
+    {
+      "source": "20261113-three-paths/final-audit.json",
+      "source_sha256": "fee30c2a288b099e6d413c93f7dc8a737f2c7879db0481c9bc22da682c7a22a3"
+    },
+    {
+      "source": "20261113-query-performance/hardware-and-deployment.txt",
+      "source_sha256": "cb85078ccb9cf083286028292ae02dfaa16c5e9abbe3e9d422f479666b7c0794"
+    },
+    {
+      "source": "20261110/environment.json",
+      "source_sha256": "3fd7712f87954393482a6f6bd4adc8a5f03cd25a918dc8bb61548c5273d25b6c"
+    },
+    {
+      "source": "20261113-range-sf500/preparation.json",
+      "source_sha256": "29e67b17d58510c61d382983a3535b854bdf063c74e24ca7b70fa347868cb078"
+    },
+    {
+      "source": "20261113-query-performance/source-process.json",
+      "source_sha256": "904cd9b0638ff03ab7020df2c8abc41375e7c42f28c720cc81d434b97dde3f55"
+    }
+  ]
+}

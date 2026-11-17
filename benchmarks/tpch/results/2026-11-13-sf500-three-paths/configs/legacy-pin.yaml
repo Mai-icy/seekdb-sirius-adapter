@@ -1,0 +1,38 @@
+sirius:
+  topology:
+    num_gpus: 2
+  space:
+    gpu:
+      - device_id: 0
+        memory_capacity: 46GiB
+      - device_id: 1
+        memory_capacity: 46GiB
+    host:
+      - numa_id: 0
+        memory_capacity: 416GiB
+        initial_number_pools: 4
+        pool_size: 64
+        block_size: 8MiB
+    disk:
+      - disk_id: 0
+        memory_capacity: 128GiB
+        mount_path: "/absolute/pin-spill"
+  executor:
+    scan_manager:
+      num_threads: 64
+      backend: sirius
+      cache:
+        mode: none
+        eviction: lru
+    pipeline:
+      num_threads: 16
+    task_creator:
+      num_threads: 16
+  operator_params:
+    scan_task_batch_size: 512MiB
+    max_sort_partition_bytes: 2GiB
+    hash_partition_bytes: 1GiB
+    concat_batch_bytes: 512MiB
+    max_build_hash_table_bytes: 2GiB
+  compression:
+    min_batch_size_bytes: 1
