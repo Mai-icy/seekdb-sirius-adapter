@@ -1,48 +1,48 @@
 # seekdb-sirius-adapter
 
-连接 seekdb 与 Sirius GPU 执行引擎的独立适配服务。数据仍由 seekdb 管理，Parquet 是计算端的中间输入；Sirius 使用未修改的上游公开接口。
+An independent adapter service connecting seekdb to the Sirius GPU query engine. seekdb remains the system of record; Parquet provides intermediate input on the compute side. The adapter uses unmodified public Sirius interfaces.
 
 ```text
-客户端 SQL
-    → seekdb：解析、权限检查、优化、原生计划和一致性快照
-    → TCP + 双向 TLS：计划与 Parquet 分片上传
-    → adapter：输入校验、快照管理、Substrait Protobuf 编码
-    → Sirius：原生读取 Parquet，执行 GPU 查询
-    → Arrow C Stream（进程内）→ 分批结果协议（TLS）
-    → seekdb → MySQL 结果 → 客户端
+Client SQL
+    → seekdb: parsing, authorization, optimization, native plans and consistent snapshots
+    → TCP + mutual TLS: plan and Parquet fragment uploads
+    → adapter: input validation, snapshot management, Substrait Protobuf encoding
+    → Sirius: native Parquet reads and GPU execution
+    → Arrow C Stream (in-process) → batched result protocol (TLS)
+    → seekdb → MySQL results → client
 ```
 
-## 仓库边界与依赖
+## Repository boundaries and dependencies
 
-| 项目 | 职责 | 上游 |
+| Project | Responsibilities | Upstream |
 | --- | --- | --- |
-| seekdb | SQL、计划、权限、读取快照、原生 Parquet 导出、传输客户端及 MySQL 回包 | [Mai-icy/seekdb](https://github.com/Mai-icy/seekdb)，集成功能分支 |
-| 本仓库 | Python 服务、快照管理、计划编码、Decimal 适配、公开 FFI 桥接及验证 | 本仓库 |
-| Sirius | Parquet 扫描、执行计划落地、GPU 计算 | [sirius-db/sirius](https://github.com/sirius-db/sirius)，不修改源码 |
+| seekdb | SQL, planning, authorization, read snapshots, native Parquet export, transport client and MySQL responses | Integration branch in [Mai-icy/seekdb](https://github.com/Mai-icy/seekdb) |
+| This repository | Python service, snapshot management, plan encoding, Decimal adaptation, public FFI bridge and validation | This repository |
+| Sirius | Parquet scans, execution-plan lowering and GPU computation | Unmodified [sirius-db/sirius](https://github.com/sirius-db/sirius) |
 
-**这是集成开发版本，不能直接搭配普通 seekdb main 使用。** 两个上游通过 Git submodule 关联，仓库固定其提交，不会随上游分支自动升级：
+**This is an integration development version; it requires the seekdb feature branch rather than a stock seekdb main checkout.** Both upstreams are Git submodules pinned to specific commits. They do not advance automatically with upstream branches:
 
-- `deps/seekdb` → 你的 fork 的 `feat/sirius-parquet` 分支，固定 `193ecbf93c940bd9d94cf24740798abda1cb7d35`。
-- `deps/sirius` → 未修改的 Sirius 上游，固定 `40106bf1c79cbbaddf64cba88a1f24287ffc1621`。
+- `deps/seekdb` → the fork's `feat/sirius-parquet` branch, pinned to `193ecbf93c940bd9d94cf24740798abda1cb7d35`.
+- `deps/sirius` → unmodified upstream Sirius, pinned to `40106bf1c79cbbaddf64cba88a1f24287ffc1621`.
 
-所需接口和更新方法见 [依赖约定](docs/upstreams.md)。[来源清单](docs/source-provenance.json) 保留首次拆分时的历史信息，当前部署版本以 submodule 指针为准。
+See [upstream dependencies](docs/upstreams.md) for required interfaces and update procedures. The [source manifest](docs/source-provenance.json) preserves the initial extraction history; submodule pointers determine the current deployment versions.
 
-当前输入路径为 **Parquet、无 pin**。Arrow 输入是另行维护、等待 Sirius 上游支持的方向，本仓库初始版本不提供 Arrow 输入执行路径；已有的 Arrow C Stream 是结果输出接口。
+The current input path uses **Parquet without pinning**. Arrow input is maintained as a separate direction pending upstream Sirius support; this repository's initial version does not provide an Arrow input execution path. The existing Arrow C Stream interface carries results.
 
-## 安装与构建
+## Installation and build
 
-首次下载配套源码：
+Clone the matching source trees:
 
 ```sh
 git clone --recurse-submodules https://github.com/Mai-icy/seekdb-sirius-adapter.git
 cd seekdb-sirius-adapter
 ```
 
-已有 checkout 更新后执行 `git submodule update --init --recursive`。该命令检出仓库记录的固定提交；不要在部署时使用 `--remote`。
+After updating an existing checkout, run `git submodule update --init --recursive`. This checks out the pinned commits. Do not use `--remote` for deployment.
 
-Sirius 自身还关联了 DuckDB、Substrait reader 及其他实验集成的仓库。只需查看两个主仓库时，可先普通 clone，再执行 `git submodule update --init deps/seekdb deps/sirius`；构建所需的嵌套依赖按 Sirius 的构建说明初始化。
+Sirius also references DuckDB, the Substrait reader and other experimental integrations. To inspect only the two main repositories, use a regular clone followed by `git submodule update --init deps/seekdb deps/sirius`. Initialize nested build dependencies according to the Sirius build instructions.
 
-计算端使用具备匹配 CUDA 环境的 Linux GPU 机器。先按 Sirius 上游说明构建固定版本；下面的头文件和 `libsirius.so` 必须来自同一构建。Python 编码单测可以在无 GPU 的机器运行。
+The compute side requires a Linux GPU machine with a matching CUDA environment. Build the pinned Sirius version according to its upstream instructions. The headers and `libsirius.so` below must come from the same build. Python encoder unit tests can run without a GPU.
 
 ```sh
 python3.12 -m venv .venv
@@ -55,13 +55,13 @@ cmake -S native -B build \
 cmake --build build --parallel
 ```
 
-运行时保证 Sirius 及其依赖库可被动态加载器找到，例如设置相应的 `LD_LIBRARY_PATH`。两个引擎需按各自构建说明编译；适配器的 CMake 只构建桥接库，不自动构建引擎，也不分发引擎二进制。
+Ensure the dynamic loader can locate Sirius and its dependencies at runtime, for example through `LD_LIBRARY_PATH`. Build each engine using its own instructions. The adapter's CMake builds only the bridge; it does not build the engines automatically or distribute engine binaries.
 
-## 两台机器运行
+## Running on two machines
 
-准备可信 CA 签发的客户端和服务端证书，服务端证书 SAN 应覆盖所用 IP 或 `TLS_SERVER_NAME`。以下均为示例路径，需替换为实际配置。
+Prepare client and server certificates signed by a trusted CA. The server certificate SAN must cover the endpoint IP or `TLS_SERVER_NAME`. Replace the example paths below with actual deployment paths.
 
-在 **seekdb 机器**上，于启动具有集成功能的数据库进程前设置：
+On the **seekdb machine**, set these variables before starting the database process built with the integration features:
 
 ```sh
 install -d -m 700 /absolute/source-inputs
@@ -75,9 +75,9 @@ export SEEKDB_SIRIUS_TLS_KEY=/absolute/tls/client.key
 export SEEKDB_SIRIUS_TLS_SERVER_NAME=gpu.example.internal
 ```
 
-`SOURCE_ID` 在不同实例间必须唯一，在同一实例重启后保持稳定。endpoint 使用数字 IPv4 地址。两端无须共享文件系统。
+`SOURCE_ID` must be unique across instances and stable across restarts of the same instance. The endpoint uses a numeric IPv4 address. The two machines do not need a shared filesystem.
 
-在 **Sirius 机器**上，从仓库根目录启动服务：
+On the **Sirius machine**, start the service from the repository root:
 
 ```sh
 install -d -m 700 /absolute/compute-inputs
@@ -92,9 +92,9 @@ CUDA_VISIBLE_DEVICES=0 python adapter/query_service.py \
   --workers 1
 ```
 
-使用与硬件匹配的 Sirius 配置并关闭 CPU fallback。`configs/dual-gpu.yaml` 是两张 48 GiB GPU、单 NUMA 大内存机器的专用配置，不是通用默认值；使用它时设置 `CUDA_VISIBLE_DEVICES=0,1`。默认单次输入配额为 16 GiB、缓存配额为 64 GiB，较大数据集需显式调高 `--snapshot-bytes` 和 `--cache-bytes`，并为并发上传留出磁盘空间。
+Use a Sirius configuration appropriate for the hardware and disable CPU fallback. `configs/dual-gpu.yaml` targets two 48 GiB GPUs and a large-memory host with one NUMA node; it is not a general default. Set `CUDA_VISIBLE_DEVICES=0,1` when using it. The default input quota is 16 GiB per request and the cache quota is 64 GiB. For larger datasets, increase `--snapshot-bytes` and `--cache-bytes` explicitly and reserve disk space for concurrent uploads.
 
-客户端仍连接 seekdb 的 MySQL 端口：
+Clients continue to connect to seekdb's MySQL port:
 
 ```sql
 SET parallel_degree_policy = 'MANUAL';
@@ -104,33 +104,33 @@ SET gpu_snapshot = '';
 SELECT COUNT(*) FROM your_table;
 ```
 
-`gpu_snapshot=''` 每次按当前语句快照导出计划所需列，查询结束后回收计算端输入。设置非空版本名，例如 `analytics-v1`，首次会导出当前数据库的全部普通持久表及可见列，完整发布后复用。命名版本要求 autocommit 且不在显式事务内；后续 DML 不改变该版本，刷新需换新版本名。它不是增量同步，也不是 GPU 常驻 pin。
+With `gpu_snapshot=''`, each statement exports the columns required by its plan at the statement's read snapshot. Compute-side inputs are reclaimed after the query. A nonempty version name, such as `analytics-v1`, initially exports all ordinary persistent tables and their visible columns in the current database, then reuses the fully published version. Named versions require autocommit outside an explicit transaction. Subsequent DML does not change the version; refresh by choosing a new name. This is neither incremental synchronization nor persistent GPU pinning.
 
-同机调试可使用同 UID 的 Unix socket：源端设置 `SEEKDB_SIRIUS_QUERY_SOCKET`，服务端用 `--socket` 替换 `--listen` 并省略 TLS 参数。若同时设置 endpoint，源端优先选择 TCP。
+For local debugging, use a Unix socket with the same UID on both sides: set `SEEKDB_SIRIUS_QUERY_SOCKET` on the source and replace `--listen` with `--socket` on the service, omitting TLS options. If an endpoint is also configured, the source prefers TCP.
 
-查看及删除未使用的命名快照：
+List and remove unused named snapshots:
 
 ```sh
 python adapter/snapshot_store.py --root /absolute/compute-inputs
 python adapter/snapshot_store.py --root /absolute/compute-inputs --drop SNAPSHOT_ID
 ```
 
-## 验证
+## Validation
 
-可复用的 [TPC-H benchmark](benchmarks/tpch/README.md) 提供 SF1/SF500 运行示例、预热与多轮 CPU/GPU 对照、JSON/Markdown 汇总及历史 SF500 说明。区分命名 Parquet 快照复用和每条 SQL 重新准备输入的计时口径；不完整或失败的套件不生成整体加速比。
+The reusable [TPC-H benchmark](benchmarks/tpch/README.md) provides SF1/SF500 examples, warmup and repeated CPU/GPU comparisons, JSON/Markdown summaries and historical SF500 notes. It distinguishes named Parquet snapshot reuse from preparing input for every SQL statement. Incomplete or failed suites do not produce an aggregate speedup.
 
 ```sh
 python -m unittest discover -s tests/unit -v
 ```
 
-真实 SQL/TLS/GPU 检查位于 `tests/integration/`，需独立测试数据库、匹配的 seekdb 二进制和远端 GPU 环境；部分脚本会创建、写入并删除测试数据库或用户。运行条件见 [测试说明](tests/README.md)。本仓库首次拆分只重新执行 CPU 单测，不把历史 SF500 数据当作新仓库的重新验收。
+Real SQL/TLS/GPU checks are in `tests/integration/`. They require an isolated test database, a matching seekdb binary and a remote GPU environment. Some scripts create, populate and delete test databases or users. See the [test instructions](tests/README.md). The initial repository extraction reran only CPU unit tests; historical SF500 results are not a new acceptance run for this repository.
 
-## 设计边界
+## Design boundaries
 
-- seekdb 导出 `SIRIUS_JSON` 原生 IR，适配层编码为 Substrait Protobuf；IR 不是标准 Substrait JSON。
-- Parquet 分片完成后才上传，全部输入就绪后才调用 Sirius。上传可与源端编码重叠，尚不支持边接收输入边执行 GPU 查询。
-- Sirius 完成执行并持有结果后暴露 Arrow C Stream，适配层分批读取、通过 TLS 回传；这不等于端到端流式计算。
-- Decimal 依据不可变输入的统计与关系约束证明可安全执行；无法证明则报错，不降级为 DOUBLE。非支持计划明确失败，不自动回退 CPU。
-- 每个请求独立子进程和 Context；命名快照复用磁盘 Parquet，不复用跨查询 GPU 驻留数据。
+- seekdb exports native `SIRIUS_JSON` IR; the adapter encodes Substrait Protobuf. The IR is not standard Substrait JSON.
+- Parquet fragments are uploaded after completion, and Sirius is invoked only after all inputs are ready. Uploads can overlap source-side encoding, but GPU execution does not consume inputs while they are still arriving.
+- Sirius finishes execution and holds the results before exposing an Arrow C Stream. The adapter reads and returns batches over TLS; this is not end-to-end streaming computation.
+- Decimal execution requires a safety proof based on immutable input statistics and relational constraints. If the proof fails, the query is rejected without conversion to DOUBLE. Unsupported plans fail explicitly without automatic CPU fallback.
+- Each request uses its own child process and Context. Named snapshots reuse Parquet on disk, not GPU-resident data across queries.
 
-更多消息格式见 [协议说明](docs/protocol.md)。许可证为 [Apache-2.0](LICENSE)。
+See the [protocol description](docs/protocol.md) for message formats. Licensed under [Apache-2.0](LICENSE).

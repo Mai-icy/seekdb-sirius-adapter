@@ -1,35 +1,35 @@
 # seekdb + Sirius TPC-H benchmark
 
-通过 seekdb MySQL 入口运行 Q1–Q22：seekdb CPU 作为结果对照，GPU 请求走本仓库的 Parquet / Substrait / Sirius 路径。每轮都对比结果值、Decimal 类型、行数和 MySQL 列元数据，随后汇总测量轮次的耗时。没有在适配器里重新规划 SQL，也没有直接绕过 seekdb 调用 GPU。
+Run Q1–Q22 through seekdb's MySQL endpoint. seekdb CPU execution provides the reference results; GPU requests follow this repository's Parquet / Substrait / Sirius path. Each round compares result values, Decimal types, row counts and MySQL column metadata before measured timings are summarized. The adapter does not replan SQL, and the runner does not bypass seekdb to invoke the GPU directly.
 
-## 准备条件
+## Prerequisites
 
-1. 按根目录 README 构建、部署 seekdb 和 Sirius 服务，配置 endpoint、双向 TLS、私有导出目录及磁盘配额，关闭 Sirius CPU fallback。
-2. 在 seekdb 中准备已经导入的 TPC-H 八表：`region`、`nation`、`supplier`、`customer`、`part`、`partsupp`、`orders`、`lineitem`。使用实际规模因子，例如 SF1 或 SF500；脚本不生成数据、不自动导入数据，也不自动启动服务。
-3. 测量期间保持源数据和 schema 不变。CPU 每次读源库，命名快照固定旧版本；二者不是跨连接共享的数据库事务快照。已有命名快照必须确认对应同一批源数据。
-4. 使用固定的 CPU DOP、数据库内存预算、GPU 数量、Sirius 配置和服务并发度。单条查询可使用多 GPU，但本入口按顺序执行，不测并发吞吐量。
-5. 在客户端安装根目录 `requirements.txt`。SQL 与 GPU 必须在实际部署环境验证；客户端可运行在第三台机器。
+1. Build and deploy seekdb and the Sirius service as described in the root README. Configure the endpoint, mutual TLS, private export directory and disk quotas, and disable Sirius CPU fallback.
+2. Load all eight TPC-H tables into seekdb: `region`, `nation`, `supplier`, `customer`, `part`, `partsupp`, `orders` and `lineitem`. Use the actual scale factor, such as SF1 or SF500. The scripts do not generate or import data, or start services automatically.
+3. Keep source data and schemas unchanged during measurement. CPU queries read the source database each time, while a named snapshot remains fixed. These are not a shared database transaction snapshot across connections. Confirm that any existing named snapshot represents the same source data.
+4. Keep CPU DOP, database memory budget, GPU count, Sirius configuration and service concurrency fixed. A query may use multiple GPUs, but this runner executes sequentially and does not measure concurrent throughput.
+5. Install the root `requirements.txt` on the client. SQL and GPU execution must be validated in the actual deployment environment; the client may run on a third machine.
 
-建议先完成 SF1 全套验证，再运行 SF500。`--scale-factor` 不会生成或检查表规模；它用于报告和 Q11 阈值调整，必须与实际数据匹配。容量规划依据 Parquet 实际大小和 GPU/主机内存配置，不能直接把 SF 数字当作显存需求。
+Complete an SF1 suite before running SF500. `--scale-factor` neither generates data nor checks table sizes; it controls reporting and the Q11 threshold and must match the actual dataset. Plan capacity using the actual Parquet size and GPU/host memory configuration, not the SF number alone.
 
-## 连接及部署记录
+## Connection and deployment records
 
 ```sh
 export SEEKDB_HOST=127.0.0.1
 export SEEKDB_PORT=2881
 export SEEKDB_USER=root
-# 如需密码，从现有凭据机制设置 SEEKDB_PASSWORD；不要写进命令参数或报告。
+# If needed, set SEEKDB_PASSWORD through your credential mechanism; do not put it in arguments or reports.
 ```
 
-也可通过 `--host`、`--port`、`--user` 覆盖连接参数。密码只从 `SEEKDB_PASSWORD` 读取。这些是客户端到 seekdb 的连接参数，与 seekdb 到 adapter 的双向 TLS 配置不同；跨机器 MySQL 访问可通过既有安全连接或 SSH 转发。
+Override connection parameters with `--host`, `--port` and `--user`. Passwords are read only from `SEEKDB_PASSWORD`. These settings control the client-to-seekdb connection and are separate from mutual TLS between seekdb and the adapter. Cross-machine MySQL access can use an existing secure connection or SSH forwarding.
 
-复制 [environment.example.json](environment.example.json) 到本地并填写部署信息，通过 `--environment` 传入。至少记录真实运行的三方提交、seekdb/桥接库/Sirius 二进制 SHA-256、GPU 型号与数量、内存预算、Sirius 配置哈希、数据来源及网络拓扑。文件会原样写入本地结果，不能包含密码、私钥或 token。
+Copy [environment.example.json](environment.example.json), fill in the deployment details and pass it with `--environment`. Record at least the actual deployed commits of all three projects; SHA-256 hashes of the seekdb, bridge and Sirius binaries; GPU model and count; memory budgets; Sirius configuration hash; dataset provenance; and network topology. The file is copied verbatim into local results and must not contain passwords, private keys or tokens.
 
-脚本自动记录的是**客户端 checkout** 的提交、dirty 状态及相关源码哈希，不会据此宣称远端进程使用相同二进制。客户端平台也不等于 GPU 机器配置。Sirius 禁用 fallback、实际上传量和缓存命中需结合服务日志确认；runner 的路径标签不是引擎运行时审计。
+The runner automatically records commits, dirty states and relevant source hashes from the **client checkout**. These do not establish which binaries remote processes are using. The client platform is also not the GPU machine's configuration. Verify disabled fallback, actual upload volume and cache hits against service logs; the runner's path labels are not an engine runtime audit.
 
-## 先预览，再执行
+## Preview before execution
 
-在仓库根目录运行；每次输出目录必须是尚不存在的新目录。
+Run from the repository root. Every output directory must be new and must not already exist.
 
 ```sh
 python benchmarks/tpch/run.py \
@@ -38,7 +38,7 @@ python benchmarks/tpch/run.py \
   --output artifacts/sf1-plan --dry-run
 ```
 
-`--dry-run` 只写 `run.json`，不会连接数据库或启动 GPU。检查其中的连接、查询集、快照名和命令后，使用新目录执行：
+`--dry-run` writes only `run.json`, without connecting to the database or starting GPU execution. Review its connection settings, query selection, snapshot name and commands, then execute with a new output directory:
 
 ```sh
 python benchmarks/tpch/run.py \
@@ -48,15 +48,15 @@ python benchmarks/tpch/run.py \
   --output artifacts/sf1-snapshot
 ```
 
-默认每轮运行完整 Q1–Q22，默认先 CPU 后 GPU。`--gpu-first` 可反转每条查询的顺序；两种顺序可能影响操作系统页缓存，因此不同顺序的结果不能直接合并。快速检查可加 `--queries 1,6`，报告会标记为查询子集，不算完整 TPC-H。
+Each round runs all Q1–Q22 by default, executing CPU before GPU for each query. `--gpu-first` reverses that order. Execution order can affect the OS page cache, so results from different orders must not be combined directly. For a quick check, add `--queries 1,6`; the report marks this as a query subset rather than a full TPC-H suite.
 
-### 命名快照复用
+### Named snapshot reuse
 
-`--mode snapshot` 默认生成唯一的 `bench-…` 版本名，至少执行一轮完整预热套件，再运行测量套件。首次 GPU 查询可能包含全库 Parquet 准备；它在预热记录中，不计入测量轮次。复用已有不可变版本可加 `--gpu-snapshot analytics-v1`，但仍需预热。
+`--mode snapshot` generates a unique `bench-…` version name by default and runs at least one complete warmup suite before the measurement suites. The first GPU query may include Parquet preparation for the entire database. It is retained in warmup records and excluded from measurement rounds. Use `--gpu-snapshot analytics-v1` to reuse an existing immutable version; warmup is still required.
 
-预热首条查询的耗时包含准备和查询，**不是独立的 Parquet 导出耗时**。导出、上传、统计收集的细分耗时从 seekdb/adapter 日志或独立导出记录获取。脚本不会自动清操作系统页缓存，也不声称预热后所有数据驻留 GPU。每次查询仍有独立 worker 和 Context 的成本。
+The first warmup query includes both preparation and execution; **it is not a standalone Parquet export time**. Obtain export, upload and statistics collection breakdowns from seekdb/adapter logs or separate export records. The runner does not clear the OS page cache or claim that warmup leaves all data resident on the GPU. Each query still incurs its own worker and Context costs.
 
-### 当前语句输入
+### Current-statement input
 
 ```sh
 python benchmarks/tpch/run.py \
@@ -65,9 +65,9 @@ python benchmarks/tpch/run.py \
   --output artifacts/sf1-statement
 ```
 
-该模式固定 `gpu_snapshot=''`，每条 GPU SQL 重新导出所需列并传输，计时包含这些步骤。它不是强制冷磁盘缓存模式，也不能与快照复用耗时混为一谈。SF500 下反复导出的成本可能很高，先用少量查询确认资源和超时配置。
+This mode fixes `gpu_snapshot=''`. Each GPU SQL statement exports and transfers its required columns again, and those steps are included in the timing. It does not force cold disk caches and must not be conflated with snapshot reuse measurements. Repeated export at SF500 can be expensive; first check resource and timeout settings with a small query subset.
 
-### SF500 快照复用示例
+### SF500 snapshot reuse example
 
 ```sh
 python benchmarks/tpch/run.py \
@@ -78,37 +78,37 @@ python benchmarks/tpch/run.py \
   --output artifacts/sf500-snapshot
 ```
 
-版本名、超时和 DOP 是示例，不自动推断最优配置。默认 1 次预热加 3 次测量会执行 4 套 CPU 与 GPU 对照，共 176 条查询，另有 GPU 计划导出。使用 `configs/dual-gpu.yaml` 前核对机器资源；它是两张 48 GiB GPU、大内存单 NUMA 主机的专用配置。
+The version name, timeout and DOP are examples, not automatically selected optimal settings. The default 1 warmup plus 3 measurement rounds execute 4 CPU/GPU comparison suites: 176 queries, plus GPU plan exports. Check hardware capacity before using `configs/dual-gpu.yaml`; it targets two 48 GiB GPUs and a large-memory host with one NUMA node.
 
-## 结果与计时口径
+## Outputs and timing definitions
 
 ```text
 artifacts/sf1-snapshot/
-├── run.json                  参数、版本、源码哈希、执行状态
-├── warmup-01.log             原始预热日志
-├── warmup-01/results.json    预热正确性和耗时，不进入汇总
-├── measurement-01.log       测量日志（后续轮次依此类推）
-├── measurement-01/          SQL、原生计划、CPU/GPU 行结果及元数据
-├── summary.json             每条查询的全部样本、中位数、最小/最大值
-└── summary.md               可阅读的结果表
+├── run.json                  Parameters, versions, source hashes and execution status
+├── warmup-01.log             Raw warmup log
+├── warmup-01/results.json    Warmup correctness and timings, excluded from aggregates
+├── measurement-01.log       Measurement log; subsequent rounds follow the same pattern
+├── measurement-01/          SQL, native plans, CPU/GPU rows and metadata
+├── summary.json             All samples, medians and min/max values for each query
+└── summary.md               Readable result table
 ```
 
-- 每条查询时间是客户端 `execute + fetchall`，包含 seekdb、适配服务、Sirius、结果传输等开销；不是纯 GPU 内核时间。
-- 会话配置、额外保存的 `EXPLAIN FORMAT=SIRIUS_JSON`、结果文件写入和外部比较不计入查询时间。`run.json` 中每轮 `wall_seconds` 则包含整轮脚本开销。
-- 每条查询汇总测量轮次中位数；套件先在每一轮内求查询耗时之和，再对轮次总和取中位数。套件中位数不等于逐查询中位数之和。
-- `CPU/GPU` 是 CPU 中位耗时除以 GPU 中位耗时。失败、缺失查询、配置不匹配、元数据不一致或不完整轮次均不生成整体加速比。
-- Q11 阈值按 SF 调整，并验证 value 降序后规范化等值行顺序；Decimal 精确比较。所有模式均是实验性正确性/性能测量，不是经审计的 TPC-H 成绩。
+- Per-query time is client-side `execute + fetchall`. It includes seekdb, the adapter, Sirius and result transfer; it is not pure GPU kernel time.
+- Session configuration, the separately saved `EXPLAIN FORMAT=SIRIUS_JSON`, result file writes and external comparison are excluded from query timings. Each round's `wall_seconds` in `run.json` includes the full script overhead.
+- Per-query summaries use the median across measurement rounds. Suite totals sum query times within each round, then take the median of those totals. The suite median is not the sum of per-query medians.
+- `CPU/GPU` is median CPU time divided by median GPU time. Failures, missing queries, mismatched settings or metadata, and incomplete rounds suppress the aggregate speedup.
+- The Q11 threshold is scaled by SF. Its value ordering is checked as descending before tie ordering is normalized; Decimal comparisons are exact. All modes are experimental correctness/performance measurements, not audited TPC-H scores.
 
-运行失败返回非零退出码并停止后续套件，保留日志与部分产物。修改配置或补测应使用新目录；不要删除失败查询后把剩余值当成完整套件。重新生成汇总不连接数据库：
+A failed run returns a nonzero exit code and stops subsequent suites while retaining logs and partial artifacts. Use a new directory for configuration changes or retries. Do not remove failed queries and present the remaining values as a complete suite. Regenerate summaries without connecting to the database:
 
 ```sh
 python benchmarks/tpch/summarize.py artifacts/sf1-snapshot
 ```
 
-命名快照不会在完成或失败后自动删除，以便复查或复用。确认不再使用后，在计算端用 `adapter/snapshot_store.py --root …` 找到对应 ID，再通过 `--drop ID` 释放。不要直接删除正在使用的快照目录。
+Named snapshots are not automatically deleted after success or failure, allowing inspection or reuse. When a version is no longer needed, locate its ID on the compute host with `adapter/snapshot_store.py --root …`, then release it with `--drop ID`. Do not delete a snapshot directory while it is in use.
 
-## 数据准备与历史记录
+## Data preparation and historical results
 
-如果需要显式预导出，数据库子仓库提供 `deps/seekdb/tools/parquet_export.py`。它按主键范围协调原生 `INTO OUTFILE`，多表需明确使用同一个有效 SCN。该工具产生的 manifest **不能直接当作** adapter 的命名快照目录；验证、身份绑定及原子发布仍需单独流程。本 benchmark 默认使用服务现有的自动快照准备或已经正确发布的版本。
+For explicit pre-export, the database submodule provides `deps/seekdb/tools/parquet_export.py`. It coordinates native `INTO OUTFILE` over primary-key ranges. Multiple tables must explicitly use the same valid SCN. Its manifest **cannot be used directly as** an adapter named snapshot directory: validation, identity binding and atomic publication require a separate workflow. This benchmark uses the service's existing automatic snapshot preparation or an already correctly published version.
 
-[2026-11-13 SF500 历史说明](results/2026-11-13-sf500.md) 保留两轮既有实验的背景、逐查询数据和限制；不代表当前 checkout 已重新执行 SF500。仓库只保存小型脱敏摘要，原始数据、机器专用日志和大体积结果留在本地或测试机器。
+The [2026-11-13 SF500 historical notes](results/2026-11-13-sf500.md) preserve the context, per-query data and limitations of two earlier experiments. They do not indicate that the current checkout has rerun SF500. The repository stores only small sanitized summaries; raw data, machine-specific logs and large result sets remain locally or on the test machines.

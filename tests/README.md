@@ -1,36 +1,36 @@
-# 验证入口
+# Validation entry points
 
-在仓库根目录激活虚拟环境并安装 `requirements.txt`。
+Activate a virtual environment and install `requirements.txt` from the repository root.
 
-## 无 GPU 单测
+## Unit tests without a GPU
 
 ```sh
 python -m unittest discover -s tests/unit -v
 ```
 
-覆盖原生计划到 Substrait、列绑定、参数、Decimal 精度边界、反连接及不可变输入统计缓存。不连接数据库或加载 Sirius。
+Coverage includes native plan to Substrait encoding, column binding, parameters, Decimal precision bounds, anti joins and immutable input statistics caching. These tests do not connect to a database or load Sirius.
 
-## 集成检查
+## Integration checks
 
-使用隔离的测试实例；脚本可能创建、写入、删除测试数据库和用户。环境与命令行参数必须与该 seekdb 进程启动时的 endpoint、TLS、导出目录相匹配。以下脚本不由默认 CPU 单测自动触发。
+Use isolated test instances. Scripts may create, populate and delete test databases and users. Environment variables and CLI arguments must match the endpoint, TLS configuration and export directory configured when seekdb started. The default CPU unit suite does not run these scripts automatically.
 
-| 入口 | 用途 |
+| Entry point | Purpose |
 | --- | --- |
-| `native_export_integration.py` | 实际 seekdb 原生计划导出和编码 |
-| `parquet_gpu_integration.py` | 公开 FFI、Parquet 列绑定及 GPU 计算 |
-| `decimal_anti_gpu_integration.py` | Decimal 与反连接实际 GPU 语义 |
-| `query_path_integration.py` | Unix socket、SQL 快照、事务及结果回传 |
-| `network_query_integration.py` | 双向 TLS、上传、命名快照、权限与生命周期 |
-| `two_host_query_integration.py` | 两台机器间 SQL 往返，服务需预先启动 |
-| `decimal_query_path_integration.py` | SQL 路径的 Decimal 边界 |
-| `tpch_plan_audit.py` | TPC-H 原生计划和 Substrait 编码检查 |
-| `tpch_query_path_integration.py` | Q1–Q22 CPU/GPU 结果值与 MySQL 元数据校验 |
+| `native_export_integration.py` | Native plan export and encoding against a real seekdb instance |
+| `parquet_gpu_integration.py` | Public FFI, Parquet column binding and GPU computation |
+| `decimal_anti_gpu_integration.py` | Actual GPU semantics for Decimal and anti joins |
+| `query_path_integration.py` | Unix socket, SQL snapshots, transactions and result return |
+| `network_query_integration.py` | Mutual TLS, uploads, named snapshots, permissions and lifecycle |
+| `two_host_query_integration.py` | SQL round trips across two machines; the service must already be running |
+| `decimal_query_path_integration.py` | Decimal edge cases through the SQL path |
+| `tpch_plan_audit.py` | TPC-H native plans and Substrait encoding checks |
+| `tpch_query_path_integration.py` | Q1–Q22 CPU/GPU result values and MySQL metadata parity |
 
-有命令行接口的脚本可通过 `--help` 查看参数；直接读取环境的脚本需检查文件中的连接配置。`query_path_integration.py` 及其复用者、TPC-H runner 均支持 `SEEKDB_HOST`、`SEEKDB_PORT`、`SEEKDB_USER`、`SEEKDB_PASSWORD`。TPC-H runner 另支持 `--host`、`--port`、`--user`，密码仅从环境读取。远端访问可使用专用 SSH 转发；不要将测试脚本直接用于生产环境。
+Use `--help` for scripts with a CLI; inspect connection settings in scripts that read their environment directly. `query_path_integration.py`, scripts reusing it and the TPC-H runner support `SEEKDB_HOST`, `SEEKDB_PORT`, `SEEKDB_USER` and `SEEKDB_PASSWORD`. The TPC-H runner also accepts `--host`, `--port` and `--user`; it reads passwords only from the environment. Remote access can use a dedicated SSH tunnel. Do not run these test scripts against production instances.
 
-单次正确性验收继续使用下面的入口；预热、多轮测量及结果汇总见 [benchmark 说明](../benchmarks/tpch/README.md)。两者复用同一套 SQL 和结果比较逻辑。
+Use the entry point below for a single correctness run. For warmup, repeated measurements and summaries, see the [benchmark instructions](../benchmarks/tpch/README.md). Both reuse the same SQL templates and result comparison logic.
 
-服务已启动、数据已导入测试库后，例如：
+After starting the service and loading the test database, for example:
 
 ```sh
 mkdir -p artifacts
@@ -40,6 +40,6 @@ python tests/integration/tpch_query_path_integration.py \
   --output artifacts/tpch-sf1
 ```
 
-输出目录应为尚不存在的新目录。Q11 阈值按规模因子调整，并规范化 SQL 未规定的等值行顺序；Decimal 使用精确值比较。记录首次准备与快照复用的差别、CPU DOP、GPU 配置及三个项目的提交。结果不是正式审计的 TPC-H 成绩。
+The output directory must not already exist. The runner adjusts the Q11 threshold by scale factor and normalizes tie ordering not specified by the SQL. Decimal values are compared exactly. Record initial preparation versus snapshot reuse, CPU DOP, GPU configuration and the commits of all three projects. These results are not audited TPC-H scores.
 
-原仓库的机器专用日志、证书、Parquet、二进制和历史大体积结果未迁入。本次拆分的 CPU 验证记录见 `docs/validation.md`；历史 GPU 验证不等于本 checkout 已重新执行 GPU 验收。
+Machine-specific logs, certificates, Parquet files, binaries and large historical result sets from the original repository were not migrated. CPU validation for the extraction is recorded in `docs/validation.md`; historical GPU validation does not mean this checkout has rerun GPU acceptance tests.
