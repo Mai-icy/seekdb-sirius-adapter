@@ -1,8 +1,8 @@
 """Serve seekdb GPU SELECTs over mutual TLS or a same-UID Unix socket.
 
-Each query runs Sirius in an isolated child process. The parent owns admission,
-peer-disconnect cancellation and child reaping; the child owns its Context and
-Arrow stream on one thread. Parquet bytes are uploaded into compute-side storage.
+A bounded pool reuses one Sirius Context per child process, serially on its main
+thread. The parent enforces disconnect cancellation and deadlines by retiring
+the affected child. Parquet bytes are uploaded into compute-side storage.
 """
 import argparse
 from contextlib import nullcontext
@@ -13,17 +13,17 @@ import tempfile
 import json
 import os
 from pathlib import Path
-import select
+import queue
 import signal
 import socket
 import stat
 import struct
-import subprocess
 import sys
 import threading
 import time
 
 from snapshot_store import SnapshotStore, private_directory
+from worker_process import WorkerProcess, send_control, receive_control
 
 MAX_FRAME = 16 * 1024 * 1024
 BATCH_BYTES = 8 * 1024 * 1024
@@ -237,7 +237,7 @@ def read_catalog(request):
     return catalog
 
 
-def worker(args):
+def worker(args, engine=None, notify=None):
     import pyarrow.parquet as pq
     from adapter_native_plan import ParquetTable
     from compute_node import open_native_result
@@ -262,6 +262,8 @@ def worker(args):
             raise ValueError("Invalid query deadline")
         conn.settimeout(timeout_ms / 1000)
         deadline = time.monotonic() + timeout_ms / 1000
+        if notify is not None:
+            notify({"event": "deadline", "deadline": deadline})
         template = request.string()
         document = json.loads(template)
         count = request.integer()
@@ -314,13 +316,18 @@ def worker(args):
                     raise ValueError("Ambiguous qualified input table name")
                 statistics = str(directory / ('.stats-' + hashlib.sha256(key.encode()).hexdigest() + '.json')) if label else None
                 tables[key] = ParquetTable(pq.read_schema(files[0]), files, statistics)
-            with open_native_result(template, tables, args.library, args.config) as (reader, info):
+            with open_native_result(template, tables, args.library, args.config, engine) as (reader, info):
                 result_started = time.monotonic()
                 stream_result(conn, reader, expected)
                 result_seconds = time.monotonic() - result_started
-            print(json.dumps(dict(event="query_timing", result_seconds=result_seconds,
+            print(json.dumps(dict(event="query_timing", worker_pid=os.getpid(),
+                                  context_reused=info["context_reused"], result_seconds=result_seconds,
                                   **{key: value for key, value in info.items() if key.endswith('_seconds')})), flush=True)
-            send(conn, b"Z")
+        # Release the result AND snapshot lease before announcing completion.
+        # The Context remains alive only when borrowed from a persistent worker.
+        if notify is not None:
+            notify({"event": "finishing"})
+        send(conn, b"Z")
     except Exception as error:
         try:
             send(conn, b"X", str(error).encode("utf-8", errors="replace")[:65536])
@@ -331,6 +338,42 @@ def worker(args):
     finally:
         conn.close()
     return 0
+
+
+def worker_loop(args):
+    """Receive accepted FDs; keep one Context on this process's main thread."""
+    from compute_node import NativeEngine
+    control = socket.socket(fileno=args.control_fd)
+    engine = NativeEngine(args.library, args.config) if args.context_reuse else None
+    try:
+        while True:
+            try:
+                job, fd = receive_control(control)
+            except EOFError:
+                return 0
+            if job.get('event') == 'ping' and fd is None:
+                send_control(control, {'event': 'ready'})
+                continue
+            if job.get('event') != 'query' or fd is None:
+                if fd is not None:
+                    os.close(fd)
+                raise ValueError("Expected worker query descriptor")
+            args.worker_fd, args.work_dir = fd, job['work']
+            try:
+                status = worker(args, engine, lambda message: send_control(control, message))
+            finally:
+                shutil.rmtree(args.work_dir, ignore_errors=True)
+            send_control(control, {'event': 'done', 'success': status == 0})
+            # Any failure retires the whole process, even a pre-execution error.
+            # This conservatively prevents reuse of questionable engine state.
+            if status != 0 or not args.context_reuse:
+                return status
+    finally:
+        try:
+            if engine is not None:
+                engine.close()
+        finally:
+            control.close()
 
 
 def serve(args):
@@ -350,45 +393,34 @@ def serve(args):
         stopping.set()
     signal.signal(signal.SIGTERM, stop)
     signal.signal(signal.SIGINT, stop)
+    command = [sys.executable, str(Path(__file__).resolve()),
+               "--library", args.library, "--config", args.config,
+               "--cache-root", args.cache_root, "--cache-bytes", str(args.cache_bytes),
+               "--snapshot-bytes", str(args.snapshot_bytes)]
+    if args.tls_cert:
+        command += ["--tls-cert", args.tls_cert, "--tls-key", args.tls_key, "--tls-ca", args.tls_ca]
+    if not args.context_reuse:
+        command += ["--no-context-reuse"]
+    slots = [WorkerProcess(command, reuse=args.context_reuse) for _ in range(args.workers)]
+    available = queue.LifoQueue()
+    for slot in slots:
+        available.put(slot)
+
     def handle(conn):
-        process = None
-        work = tempfile.mkdtemp(prefix=".upload-", dir=args.cache_root)
+        slot = None
+        work = None
         try:
             with conn:
-                command = [sys.executable, str(Path(__file__).resolve()),
-                           "--worker-fd", str(conn.fileno()), "--library", args.library,
-                           "--config", args.config, "--cache-root", args.cache_root,
-                           "--work-dir", work, "--cache-bytes", str(args.cache_bytes),
-                           "--snapshot-bytes", str(args.snapshot_bytes)]
-                if args.tls_cert:
-                    command += ["--tls-cert", args.tls_cert, "--tls-key", args.tls_key, "--tls-ca", args.tls_ca]
-                process = subprocess.Popen(command, pass_fds=(conn.fileno(),), start_new_session=True)
-                while process.poll() is None and not stopping.is_set():
-                    ready, _, _ = select.select([conn], [], [], 0.1)
-                    if ready:
-                        # The worker may consume the readable bytes after
-                        # select(); EAGAIN does not mean the peer disconnected.
-                        try:
-                            pending = conn.recv(1, socket.MSG_PEEK | socket.MSG_DONTWAIT)
-                        except BlockingIOError:
-                            continue
-                        except ConnectionResetError:
-                            break
-                        if not pending:
-                            break
-                        time.sleep(0.05)
-                if process.poll() is None:
-                    process.terminate()
-                    try:
-                        process.wait(timeout=2)
-                    except subprocess.TimeoutExpired:
-                        process.kill()
-                        process.wait()
+                slot = available.get_nowait()
+                work = tempfile.mkdtemp(prefix=".upload-", dir=args.cache_root)
+                slot.run(conn, work, stopping)
+        except Exception as error:
+            print(f"GPU worker failed: {error}", file=sys.stderr, flush=True)
         finally:
-            if process is not None and process.poll() is None:
-                process.kill()
-                process.wait()
-            shutil.rmtree(work, ignore_errors=True)
+            if work is not None:
+                shutil.rmtree(work, ignore_errors=True)
+            if slot is not None:
+                available.put(slot)
             admission.release()
             with lock:
                 threads.discard(threading.current_thread())
@@ -414,7 +446,19 @@ def serve(args):
             uid = os.getuid()
             if path:
                 _, uid, _ = struct.unpack("3i", conn.getsockopt(socket.SOL_SOCKET, socket.SO_PEERCRED, 12))
-            if uid != os.getuid() or not admission.acquire(timeout=1):
+            if uid != os.getuid():
+                conn.close()
+                continue
+            # An error frame may reach the client before its failed Context has
+            # finished shutting down. Queue the next connection briefly instead
+            # of rejecting it during normal worker replacement.
+            admitted = False
+            admission_deadline = time.monotonic() + 30
+            while not stopping.is_set() and time.monotonic() < admission_deadline:
+                if admission.acquire(timeout=0.1):
+                    admitted = True
+                    break
+            if not admitted:
                 conn.close()
                 continue
             thread = threading.Thread(target=handle, args=(conn,), daemon=True)
@@ -429,7 +473,9 @@ def serve(args):
         with lock:
             active = list(threads)
         for thread in active:
-            thread.join(timeout=5)
+            thread.join()
+        for slot in slots:
+            slot.close()
 
 
 def main():
@@ -447,11 +493,16 @@ def main():
     parser.add_argument("--config", required=True)
     parser.add_argument("--workers", type=int, default=1)
     parser.add_argument("--worker-fd", type=int)
+    parser.add_argument("--control-fd", type=int, help=argparse.SUPPRESS)
+    parser.add_argument("--context-reuse", action=argparse.BooleanOptionalAction, default=True,
+                        help="Reuse one Context per worker (default); disable for one-shot isolation")
     args = parser.parse_args()
     for name in ("library", "config", "cache_root"):
         setattr(args, name, str(Path(getattr(args, name)).resolve(strict=True)))
     if not 0 < args.snapshot_bytes <= args.cache_bytes:
         parser.error("Require 0 < snapshot-bytes <= cache-bytes")
+    if args.control_fd is not None:
+        return worker_loop(args)
     if args.worker_fd is not None:
         return worker(args)
     if bool(args.socket) == bool(args.listen) or not 1 <= args.workers <= 16:

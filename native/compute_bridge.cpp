@@ -19,7 +19,8 @@
 
 // Python/C++ boundary owned by seekdb. The engine interface is Sirius's
 // unmodified public C++ FFI. A compute process owns exactly one Context and
-// releases every Arrow stream/result before destroying it, on the same thread.
+// releases each Arrow stream/result before the next query, and destroys the
+// Context on that same thread when the process retires.
 namespace {
 void error_text(char *output, size_t capacity, const char *message) noexcept
 {

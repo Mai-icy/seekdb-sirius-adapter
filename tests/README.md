@@ -8,7 +8,7 @@ Activate a virtual environment and install `requirements.txt` from the repositor
 python -m unittest discover -s tests/unit -v
 ```
 
-Coverage includes native plan to Substrait encoding, column binding, parameters, Decimal precision bounds, anti joins and immutable input statistics caching. These tests do not connect to a database or load Sirius.
+Coverage includes native plan to Substrait encoding, column binding, parameters, Decimal precision bounds, anti joins, immutable input statistics caching, Context ownership, and Linux worker FD transfer/cancellation/replacement. Linux lifecycle cases are skipped on macOS. These tests do not connect to a database or load Sirius.
 
 ## Integration checks
 
@@ -21,6 +21,7 @@ Use isolated test instances. Scripts may create, populate and delete test databa
 | `decimal_anti_gpu_integration.py` | Actual GPU semantics for Decimal and anti joins |
 | `query_path_integration.py` | Unix socket, SQL snapshots, transactions and result return |
 | `network_query_integration.py` | Mutual TLS, uploads, named snapshots, permissions and lifecycle |
+| `context_reuse_integration.py` | Real GPU Context reuse with changed/empty/NULL inputs, native errors, disconnects, deadlines and idle crashes; starts an isolated Unix service |
 | `two_host_query_integration.py` | SQL round trips across two machines; the service must already be running |
 | `decimal_query_path_integration.py` | Decimal edge cases through the SQL path |
 | `tpch_plan_audit.py` | TPC-H native plans and Substrait encoding checks |
@@ -43,3 +44,17 @@ python tests/integration/tpch_query_path_integration.py \
 The output directory must not already exist. The runner adjusts the Q11 threshold by scale factor and normalizes tie ordering not specified by the SQL. Decimal values are compared exactly. Record initial preparation versus snapshot reuse, CPU DOP, GPU configuration and the commits of all three projects. These results are not audited TPC-H scores.
 
 Machine-specific logs, certificates, Parquet files, binaries and large historical result sets from the original repository were not migrated. CPU validation for the extraction is recorded in `docs/validation.md`; historical GPU validation does not mean this checkout has rerun GPU acceptance tests.
+
+Context reuse GPU regression (output must not exist):
+
+```sh
+python tests/integration/context_reuse_integration.py \
+  --library /absolute/libsirius_compute_bridge.so \
+  --config /absolute/sirius.yaml \
+  --output /absolute/private/reuse-check
+```
+
+`query_timing` logs include `worker_pid` and `context_reused`. `release_seconds`
+measures per-query Arrow cleanup; `close_seconds` is zero for borrowed Contexts
+and measures teardown in one-shot mode. Compare first-use and warmed requests
+separately, with the same input snapshot and network topology.

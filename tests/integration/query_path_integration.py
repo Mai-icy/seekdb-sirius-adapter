@@ -258,12 +258,13 @@ def main():
                         raise AssertionError("Unsupported GPU query executed: " + query)
                 passed("unsupported_queries_do_not_fall_back")
 
-                def wait_worker_exit():
-                    children = Path(f"/proc/{service.pid}/task/{service.pid}/children")
+                def wait_query_cleanup():
+                    # Idle workers can retain Contexts; cancelled requests cannot
+                    # retain their temporary input directories.
                     deadline = time.monotonic() + 10
-                    while children.exists() and children.read_text().strip():
+                    while list(cache.glob('.upload-*')):
                         if time.monotonic() >= deadline:
-                            raise AssertionError("Cancelled GPU worker was not reaped")
+                            raise AssertionError("Cancelled GPU inputs were not cleaned")
                         time.sleep(0.1)
 
                 def kill_request():
@@ -278,9 +279,11 @@ def main():
                     raise AssertionError("KILL QUERY did not interrupt the GPU query")
                 assert relay.callback is None
                 assert not list(args.export_root.iterdir())
-                wait_worker_exit()
+                wait_query_cleanup()
                 cursor.execute("SELECT 1")
                 assert cursor.fetchone() == (1,)
+                cursor.execute(f"SELECT COUNT(*) FROM {a}")
+                assert cursor.fetchone() == (4,)
                 passed("kill_query_cleans_inputs_and_preserves_connection")
 
                 cursor.execute("SET ob_query_timeout=2000000")
@@ -300,7 +303,7 @@ def main():
                 assert relay.callback is None
                 assert not list(args.export_root.iterdir())
                 assert delay_done.wait(5)
-                wait_worker_exit()
+                wait_query_cleanup()
                 cursor.execute("SET ob_query_timeout=120000000")
                 passed("timeout_cancels_worker_and_cleans_inputs")
 

@@ -108,6 +108,18 @@ With `gpu_snapshot=''`, each statement exports the columns required by its plan 
 
 For local debugging, use a Unix socket with the same UID on both sides: set `SEEKDB_SIRIUS_QUERY_SOCKET` on the source and replace `--listen` with `--socket` on the service, omitting TLS options. If an endpoint is also configured, the source prefers TCP.
 
+Context reuse is enabled by default. The first query initializes Sirius; later
+successful queries reuse the same worker and Context. `--workers` limits the
+number of processes, with one query at a time per process. Engine memory pools
+remain alive while idle, so account for their combined memory when increasing
+worker count. This does not retain previous Arrow results or pin input data.
+
+Use `--no-context-reuse` for per-query process/Context isolation or cold-start
+comparisons. Errors, disconnects and deadlines retire the affected worker; the
+next request starts a fresh one. Connections wait up to 30 seconds for a free
+worker. The parent enforces deadlines even during blocking native execution.
+Service shutdown releases idle Contexts and reaps active workers.
+
 List and remove unused named snapshots:
 
 ```sh
@@ -133,6 +145,6 @@ Real SQL/TLS/GPU checks are in `tests/integration/`. They require an isolated te
 - Parquet fragments are uploaded after completion, and Sirius is invoked only after all inputs are ready. Uploads can overlap source-side encoding, but GPU execution does not consume inputs while they are still arriving.
 - Sirius finishes execution and holds the results before exposing an Arrow C Stream. The adapter reads and returns batches over TLS; this is not end-to-end streaming computation.
 - Decimal execution requires a safety proof based on immutable input statistics and relational constraints. If the proof fails, the query is rejected without conversion to DOUBLE. Unsupported plans fail explicitly without automatic CPU fallback.
-- Each request uses its own child process and Context. Named snapshots reuse Parquet on disk, not GPU-resident data across queries.
+- Workers reuse one Context per process, serially. Each query releases its Arrow results; errors, disconnects and deadlines retire the affected worker. Named snapshots reuse Parquet on disk, not GPU-resident data across queries.
 
 See the [protocol description](docs/protocol.md) for message formats. Licensed under [Apache-2.0](LICENSE).
